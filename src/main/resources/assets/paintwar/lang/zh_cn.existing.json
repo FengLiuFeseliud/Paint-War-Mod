@@ -1,0 +1,53 @@
+{
+    "itemGroup.paintwar.tool_group": "颜料工具",
+
+    "item.paintwar.empty_color_picker": "取色器",
+    "item.paintwar.empty_color_picker.tooltip": "可以从带颜色名字的 方块/颜料/展示框物品 获取一种颜色",
+
+    "item.paintwar.color_picker": "取色器",
+    "item.paintwar.color_picker.tooltip": "选中颜色的取色器, 在背包中用此物品对 喷枪/画笔 点击来设置颜色",
+
+    "item.paintwar.empty_spray_gun": "喷枪",
+    "item.paintwar.empty_spray_gun.tooltip": "没有设置颜色的喷枪没有任何用处... 用取色器来设置颜色吧",
+
+    "item.paintwar.spray_gun": "喷枪",
+    "item.paintwar.spray_gun.tooltip": "已经设置颜色的喷枪, 可以对带颜色名字的 方块/物品 进行改色, 范围 3*3",
+
+    "item.paintwar.empty_brush": "画笔",
+    "item.paintwar.empty_brush.tooltip": "没有设置颜色的画笔没有任何用处... 用取色器来设置颜色吧",
+
+    "item.paintwar.brush": "画笔",
+    "item.paintwar.brush.tooltip": "已经设置颜色的画笔, 可以对带颜色名字的 方块/物品 进行改色",
+
+    "item.paintwar.empty_water_balloon": "没有灌水的气球",
+    "item.paintwar.empty_water_balloon.tooltip": "就一个没气的气球, 好像可以灌水玩?",
+
+    "item.paintwar.water_balloon": "水气球",
+    "item.paintwar.water_balloon.tooltip": "落地后会在附近流出水, 砸到 生物/玩家 影响目标视线, 水范围会变小, 好像可以设置颜色?",
+
+    "item.paintwar.color_water_balloon": "颜料气球",
+    "item.paintwar.color_water_balloon.tooltip": "落地后对带颜色名字的 方块/物品 进行改色, 砸到 生物/玩家 影响目标视线, 改色范围会变小",
+
+    "item.paintwar.empty_wall_gun": "未填充颜料的墙体枪",
+    "item.paintwar.empty_wall_gun.tooltip": "使用背包带颜色名字的方块建造7*4的墙体, 射出来的怎么都是带_的啊? 好像可以设置颜色来统一方块颜色?",
+
+    "item.paintwar.wall_gun": "墙体枪",
+    "item.paintwar.wall_gun.tooltip": "使用背包带颜色名字的方块建造7*4的墙体, 连射出来的方块颜色都统一了!",
+
+    "item.paintwar.wall_shell": "墙体弹",
+
+    "item.paintwar.paint_smoke_bomb": "颜料烟雾弹",
+    "item.paintwar.paint_smoke_bomb.tooltip": "就是带颜色的烟雾弹, 落地后会产生烟雾让人看不清, 烟雾持续 18 秒",
+
+    "item.paintwar.signal_gun": "信号枪",
+    "item.paintwar.signal_gun.tooltip": "信号枪, 发射信号弹, 信号弹落地后会产生 8 格高烟雾以标记位置, 烟雾持续 30 秒",
+
+    "item.paintwar.signal_shell": "信号弹",
+    "item.paintwar.signal_shell.tooltip": "就是带颜色的信号弹, 会产生 8 格高烟雾以标记位置, 烟雾持续 30 秒",
+
+    "item.paintwar.scatter_color_gun": "散射颜料枪",
+    "item.paintwar.scatter_color_gun.tooltip": "一次发射三个颜料气球, 蹲下时发射墙体, 好像可以附魔多重射击?",
+
+    "item.paintwar.color_scatter_color_gun": "散射颜料枪",
+    "item.paintwar.color_scatter_color_gun.tooltip": "一次发射三个颜料气球, 蹲下时发射墙体, 连射出来的颜色都统一了! 好像可以附魔多重射击?"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "paintwar:item/color_scatter_color_gun"
+  }
+}

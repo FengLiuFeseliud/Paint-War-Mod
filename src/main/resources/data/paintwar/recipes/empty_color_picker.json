@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " GO",
+    "G G",
+    "GG "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "O": {
+      "tag": "minecraft:buttons"
+    }
+  },
+  "result": {
+    "item": "paintwar:empty_color_picker",
+    "count": 1
+  }
+}

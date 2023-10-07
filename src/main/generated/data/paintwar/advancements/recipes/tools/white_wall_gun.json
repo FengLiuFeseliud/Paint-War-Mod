@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "paintwar:white_wall_gun"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_wall_gun": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paintwar:white_wall_gun"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_white_wall_gun",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "paintwar:white_wall_gun"
+    ]
+  }
+}

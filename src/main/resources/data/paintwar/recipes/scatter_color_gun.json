@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " II",
+    "III",
+    "IIG"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "G": {
+      "item": "paintwar:empty_wall_gun"
+    }
+  },
+  "result": {
+    "item": "paintwar:scatter_color_gun",
+    "count": 1
+  }
+}

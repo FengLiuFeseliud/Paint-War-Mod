@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "paintwar:item/wall_gun/wall_gun",
+    "layer1": "paintwar:item/wall_gun/wall_gun",
+    "layer2": "paintwar:item/wall_gun/wall_gun_overlay"
+  }
+}

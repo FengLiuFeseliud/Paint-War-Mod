@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "paintwar:item/spray_gun/spray_gun",
+    "layer1": "paintwar:item/spray_gun/spray_gun",
+    "layer2": "paintwar:item/spray_gun/spray_gun_overlay"
+  }
+}

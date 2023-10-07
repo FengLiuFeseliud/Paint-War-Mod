@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blue_color_water_balloon": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "paintwar:blue_color_water_balloon"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "paintwar:blue_color_water_balloon"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_blue_color_water_balloon",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "paintwar:blue_color_water_balloon"
+    ]
+  }
+}

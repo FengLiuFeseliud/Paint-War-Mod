@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OS ",
+    "G G",
+    " G "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "S": {
+      "tag": "minecraft:slabs"
+    },
+    "O": {
+      "tag": "minecraft:buttons"
+    }
+  },
+  "result": {
+    "item": "paintwar:empty_spray_gun",
+    "count": 1
+  }
+}
