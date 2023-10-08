@@ -15,6 +15,13 @@ public class RecipeGenerator extends FabricRecipeProvider {
         super(output);
     }
 
+    /**
+     * 生成物品配方
+     * <p>
+     * 通过调用 {@link BaseItem#generateRecipe(Consumer)} 生成物品配方
+     * <p>
+     * 通过调用 {@link BaseBlockItem#generateRecipe(Consumer)} 生成块物品配方
+     */
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
         RegisterUtil.ITEMS.forEach(item -> {

@@ -46,6 +46,12 @@ public class LangGeneration extends FabricLanguageProvider {
         this.colorTranslations.put("black", "黑色");
     }
 
+
+    /**
+     * 生成实现 {@link IColor} 的 16 色 物品/块 名, 使用 {@link IColor#getTextureName() textureName} 拼接文本键
+     * <p>
+     * 用拼接的文本键的值, 拼接 {@link LangGeneration#colorTranslations color} 的值, 以生成实现 {@link IColor} 的 16 色 物品/块 名
+     */
     @Override
     public void generateTranslations(TranslationBuilder translationBuilder) {
         JsonObject translations;

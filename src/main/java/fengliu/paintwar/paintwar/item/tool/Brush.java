@@ -22,7 +22,6 @@ public class Brush extends ColorPicker {
         this.dyeColor = dyeColor;
     }
 
-
     @Override
     public DyeColor getColor() {
         return this.dyeColor;

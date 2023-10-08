@@ -18,6 +18,9 @@ import java.util.function.Consumer;
 
 import static net.minecraft.data.client.Models.GENERATED;
 
+/**
+ * 默认自动生成 "item/" 下的 generated 单层物品模型, 参考 {@link fengliu.paintwar.paintwar.data.generation.ModelsDataGeneration#generateItemModels(ItemModelGenerator) generateItemModels}
+ */
 public class BaseItem extends Item {
     public static final String PREFIXED_PATH = "item/";
     public final String name;
@@ -71,6 +74,10 @@ public class BaseItem extends Item {
         GENERATED.upload(ModelIds.getItemModelId(this), TextureMap.layer0(IdUtil.get(this.getTextureName()).withPrefixedPath(this.getPrefixedPath())), itemModelGenerator.writer);
     }
 
+    /**
+     * 生成物品配方
+     * @param exporter 配方生成器
+     */
     public void generateRecipe(Consumer<RecipeJsonProvider> exporter){
 
     }

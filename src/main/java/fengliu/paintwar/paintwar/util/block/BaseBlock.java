@@ -59,22 +59,47 @@ public class BaseBlock extends Block {
         return PREFIXED_PATH;
     }
 
+    /**
+     * 获取模型 {@link Identifier}
+     * @return 模型 Identifier
+     */
     public Identifier getModelId(){
         return IdUtil.get(this.getPrefixedPath() + this.getTextureName());
     }
 
+    /**
+     * 方块可以改色
+     * @return 返回 false, 不可以改色
+     */
     public boolean canSprayBlock(){
         return false;
     }
 
+    /**
+     * 方块正在被改色, 在此处被调用 {@link fengliu.paintwar.paintwar.item.tool.Brush#sprayBlock(World, BlockPos, BlockState, DyeColor) sprayBlock}
+     * @param world 世界
+     * @param pos 方块坐标
+     * @param blockState 方块状态
+     * @param color 会被改为的颜色
+     * @param sprayBlock 是否可以改色
+     * @return 返回新的方块状态. 如果返回旧方块状态将继续改色
+     */
     public BlockState onSprayBlock(World world, BlockPos pos, BlockState blockState, DyeColor color, boolean sprayBlock){
         return blockState;
     }
 
+    /**
+     * 生成方块状态, 参考 {@link fengliu.paintwar.paintwar.data.generation.ModelsDataGeneration#generateBlockStateModels(BlockStateModelGenerator) generateBlockStateModels}
+     * @param blockStateModelGenerator 方块状态模型生成器
+     */
     public void generateBlockStateModel(BlockStateModelGenerator blockStateModelGenerator){
 
     }
 
+    /**
+     * 生成方块模型, 参考 {@link fengliu.paintwar.paintwar.data.generation.ModelsDataGeneration#generateBlockStateModels(BlockStateModelGenerator) generateBlockStateModels}
+     * @param blockStateModelGenerator 方块状态模型生成器
+     */
     public void generateBlockModel(BlockStateModelGenerator blockStateModelGenerator) {
         if (this.color == null){
             return;

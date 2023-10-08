@@ -16,6 +16,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+/**
+ * 16色物品实物
+ */
 public abstract class ColorItemThrownEntity extends ThrownItemEntity {
     private static final TrackedData<Integer> COLOR;
 
@@ -31,13 +34,23 @@ public abstract class ColorItemThrownEntity extends ThrownItemEntity {
         super(entityType, user, world);
     }
 
+    /**
+     * 该物品所有颜色物品
+     */
     public abstract List<BaseItem> getColorItems();
 
+    /**
+     * 默认颜色物品, 默认为所有颜色物品第一个
+     * @return 默认颜色物品
+     */
     @Override
     protected Item getDefaultItem() {
         return this.getColorItems().get(0);
     }
 
+    /**
+     * 通过记录的颜色返回对应颜色物品
+     */
     @Override
     public ItemStack getStack() {
         for(Item item: this.getColorItems()){
@@ -56,10 +69,18 @@ public abstract class ColorItemThrownEntity extends ThrownItemEntity {
         this.getDataTracker().startTracking(COLOR, DyeColor.WHITE.getId());
     }
 
+    /**
+     * 获取颜色
+     * @return 颜色
+     */
     public DyeColor getColor() {
         return DyeColor.byId(this.dataTracker.get(COLOR));
     }
 
+    /**
+     * 设置颜色
+     * @param color 颜色
+     */
     public void setColor(DyeColor color) {
         if (color == null){
             this.dataTracker.set(COLOR, -1);
@@ -68,6 +89,9 @@ public abstract class ColorItemThrownEntity extends ThrownItemEntity {
         this.dataTracker.set(COLOR, color.getId());
     }
 
+    /**
+     * 设置实体物品时记录颜色
+     */
     @Override
     public void setItem(ItemStack item) {
         super.setItem(item);

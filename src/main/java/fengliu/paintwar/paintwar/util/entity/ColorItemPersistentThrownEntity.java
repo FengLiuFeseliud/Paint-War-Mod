@@ -10,6 +10,9 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
+/**
+ * 16色物品可停留实物, 这个实物可以落地后存在自定义 tick 的时间
+ */
 public abstract class ColorItemPersistentThrownEntity extends ColorItemThrownEntity{
     private static final TrackedData<Integer> DURATION_TICK = DataTracker.registerData(ColorItemPersistentThrownEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private static final TrackedData<Boolean> FALL = DataTracker.registerData(ColorItemPersistentThrownEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
@@ -30,28 +33,54 @@ public abstract class ColorItemPersistentThrownEntity extends ColorItemThrownEnt
         this.getDataTracker().startTracking(FALL, false);
     }
 
+    /**
+     * 最大存在 tick
+     * @return 最大存在 tick
+     */
     public abstract int getMaxDurationTick();
 
+    /**
+     * 当前剩于存在 tick
+     * @return 剩于 tick
+     */
     public int getDurationTick(){
         return this.getDataTracker().get(DURATION_TICK);
     }
 
+    /**
+     * 设置剩于存在 tick, 用于从 {@link ColorItemPersistentThrownEntity#readCustomDataFromNbt(NbtCompound) readCustomDataFromNbt} 设置剩于存在 tick
+     * @param tick 剩于 tick
+     */
     private void setDurationTick(int tick){
         this.getDataTracker().set(DURATION_TICK, tick);
     }
 
+    /**
+     * 剩于存在 tick减一
+     */
     public void dropDurationTick(){
         this.getDataTracker().set(DURATION_TICK, this.getDurationTick() - 1);
     }
 
+    /**
+     * 获取是否落地
+     * @return true, 落地
+     */
     public boolean getFall(){
         return this.getDataTracker().get(FALL);
     }
 
+    /**
+     * 设置是否落地
+     * @param fallIn true, 落地
+     */
     public void setFall(boolean fallIn){
         this.getDataTracker().set(FALL, fallIn);
     }
 
+    /**
+     * 如果落地, 开始  tick 减一
+     */
     @Override
     public void tick() {
         if (!this.getFall()){
@@ -73,6 +102,7 @@ public abstract class ColorItemPersistentThrownEntity extends ColorItemThrownEnt
             return;
         }
 
+        // 落地
         this.setFall(true);
     }
 
