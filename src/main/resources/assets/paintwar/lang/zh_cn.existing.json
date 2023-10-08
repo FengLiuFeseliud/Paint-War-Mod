@@ -1,5 +1,6 @@
 {
     "itemGroup.paintwar.tool_group": "颜料工具",
+    "itemGroup.paintwar.block_group": "颜料方块",
 
     "item.paintwar.empty_color_picker": "取色器",
     "item.paintwar.empty_color_picker.tooltip": "可以从带颜色名字的 方块/颜料/展示框物品 获取一种颜色",
@@ -49,5 +50,11 @@
     "item.paintwar.scatter_color_gun.tooltip": "一次发射三个颜料气球, 蹲下时发射墙体, 好像可以附魔多重射击?",
 
     "item.paintwar.color_scatter_color_gun": "散射颜料枪",
-    "item.paintwar.color_scatter_color_gun.tooltip": "一次发射三个颜料气球, 蹲下时发射墙体, 连射出来的颜色都统一了! 好像可以附魔多重射击?"
+    "item.paintwar.color_scatter_color_gun.tooltip": "一次发射三个颜料气球, 蹲下时发射墙体, 连射出来的颜色都统一了! 好像可以附魔多重射击?",
+
+    "block.paintwar.grid_bridge": "网格架",
+    "block.item.paintwar.grid_bridge.tooltip": "网格架, 可以在上面行走, 好像可以设置颜色?",
+
+    "block.paintwar.color_grid_bridge": "网格架",
+    "block.item.paintwar.color_grid_bridge.tooltip": "让颜料可以从网格中流下, 使颜料不会改变这个方块颜色"
 }

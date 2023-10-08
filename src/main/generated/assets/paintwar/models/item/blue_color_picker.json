@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "paintwar:item/color_picker/color_picker",
-    "layer1": "paintwar:item/color_picker/color_picker",
-    "layer2": "paintwar:item/color_picker/color_picker_overlay"
-  }
-}

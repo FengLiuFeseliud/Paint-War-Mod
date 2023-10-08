@@ -78,7 +78,7 @@ public class ScatterColorGun extends BaseItem {
                 if (!player.isSneaking()){
                     break;
                 }
-                List<Block> blocks = EmptyWallGun.getWallBlocks(player, this.getColor());
+                List<Block> blocks = EmptyWallGun.getWallBlocks(world, player, this.getColor());
                 if (blocks.isEmpty()){
                     break;
                 }

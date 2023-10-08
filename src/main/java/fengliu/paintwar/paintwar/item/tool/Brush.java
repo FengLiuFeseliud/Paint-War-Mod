@@ -1,6 +1,7 @@
 package fengliu.paintwar.paintwar.item.tool;
 
 import fengliu.paintwar.paintwar.item.ModItems;
+import fengliu.paintwar.paintwar.util.block.BaseBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
@@ -9,6 +10,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class Brush extends ColorPicker {
@@ -29,9 +32,20 @@ public class Brush extends ColorPicker {
         return ModItems.EMPTY_BRUSH;
     }
 
-    public static BlockState sprayBlock(BlockState blockState, @Nullable DyeColor color) {
+    public static BlockState sprayBlock(World world, @Nullable BlockPos pos, BlockState blockState, @Nullable DyeColor color) {
         if (color == null){
             return blockState;
+        }
+
+        if (blockState.getBlock() instanceof BaseBlock block){
+            if (!block.canSprayBlock()){
+                return block.onSprayBlock(world, pos, blockState, color, false);
+            }
+
+            BlockState state = block.onSprayBlock(world, pos, blockState, color, true);
+            if (!blockState.isOf(state.getBlock())){
+                return state;
+            }
         }
 
         String blockPath = Registries.BLOCK.getId(blockState.getBlock()).getPath();
@@ -40,14 +54,19 @@ public class Brush extends ColorPicker {
                 continue;
             }
 
-            return Registries.BLOCK.get(new Identifier(blockPath.replace(oldColor.getName(), color.getName()))).getDefaultState();
+            return Registries.BLOCK.get(
+                    new Identifier(
+                        Registries.BLOCK.getId(blockState.getBlock()).getNamespace(),
+                        blockPath.replace(oldColor.getName(), color.getName())
+                    )
+            ).getDefaultState();
         }
         return blockState;
     }
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        context.getWorld().setBlockState(context.getBlockPos(), Brush.sprayBlock(context.getWorld().getBlockState(context.getBlockPos()), this.getColor()));
+        context.getWorld().setBlockState(context.getBlockPos(), Brush.sprayBlock(context.getWorld(), context.getBlockPos(), context.getWorld().getBlockState(context.getBlockPos()), this.getColor()));
         if (context.getWorld().isClient()) {
             return ActionResult.SUCCESS;
         }

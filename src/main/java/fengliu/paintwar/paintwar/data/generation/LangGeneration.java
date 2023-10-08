@@ -5,9 +5,10 @@ import com.google.gson.JsonParser;
 import fengliu.paintwar.paintwar.PaintWar;
 import fengliu.paintwar.paintwar.util.RegisterUtil;
 import fengliu.paintwar.paintwar.util.color.IColor;
-import fengliu.paintwar.paintwar.util.item.BaseItem;
+import fengliu.paintwar.paintwar.util.item.BaseBlockItem;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.item.Item;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -59,18 +60,21 @@ public class LangGeneration extends FabricLanguageProvider {
             throw new RuntimeException("Failed to add existing language file!", e);
         }
 
-        RegisterUtil.COLORS_ITEM_LIST.forEach(colorItemList -> {
-            for(BaseItem item: colorItemList){
-                if (!(item instanceof IColor color)){
-                    continue;
+        RegisterUtil.ITEMS.forEach(item -> {
+            String translationKey = null;
+            try {
+                if (item instanceof BaseBlockItem blockItem){
+                    if (!(blockItem.getBlock() instanceof IColor color)){
+                        return;
+                    }
+                    translationKey = "block." + PaintWar.MOD_ID + "." + color.getTextureName();
+                    translationBuilder.add(blockItem.getBlock(), this.colorTranslations.get(color.getColor().getName())+translations.get(translationKey).getAsString());
+                } else if (item instanceof IColor color){
+                    translationKey = "item." + PaintWar.MOD_ID + "." + color.getTextureName();
+                    translationBuilder.add((Item) color, this.colorTranslations.get(color.getColor().getName())+translations.get(translationKey).getAsString());
                 }
-
-                String translationKey = "item." + PaintWar.MOD_ID + "."+item.getTextureName();
-                try {
-                    translationBuilder.add(item, this.colorTranslations.get(color.getColor().getName())+translations.get(translationKey).getAsString());
-                } catch (Exception e) {
-                    throw new RuntimeException("未添加键 "+ translationKey + " ?", e);
-                }
+            } catch (Exception e) {
+                throw new RuntimeException("未添加键 "+ translationKey + " ?", e);
             }
         });
     }

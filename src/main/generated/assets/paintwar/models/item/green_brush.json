@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "paintwar:item/brush/brush",
-    "layer1": "paintwar:item/brush/brush",
-    "layer2": "paintwar:item/brush/brush_overlay"
-  }
-}

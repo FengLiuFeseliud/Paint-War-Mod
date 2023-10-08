@@ -1,6 +1,7 @@
 package fengliu.paintwar.paintwar.data.generation;
 
 import fengliu.paintwar.paintwar.util.RegisterUtil;
+import fengliu.paintwar.paintwar.util.item.BaseBlockItem;
 import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -16,13 +17,15 @@ public class RecipeGenerator extends FabricRecipeProvider {
 
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
-        RegisterUtil.COLORS_ITEM_LIST.forEach(colorItems -> {
-            for(BaseItem item: colorItems){
-                try {
-                    item.generateRecipe(exporter);
-                } catch (IllegalStateException | ConcurrentModificationException ignored){
-
+        RegisterUtil.ITEMS.forEach(item -> {
+            try {
+                if (item instanceof BaseItem baseItem){
+                    baseItem.generateRecipe(exporter);
+                } else if (item instanceof BaseBlockItem blockItem){
+                    blockItem.generateRecipe(exporter);
                 }
+            } catch (IllegalStateException | ConcurrentModificationException ignored){
+
             }
         });
     }

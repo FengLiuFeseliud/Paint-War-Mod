@@ -46,14 +46,14 @@ public class ColorWaterBalloonEntity extends ColorItemThrownEntity {
         }
 
         ShapeUtil.rhombus(HIT_BLOCK_SPRAY_SIZE, BlockPos.ofFloored(hitResult.getPos()), this.getMovementDirection(), this.getWorld(),
-                pos -> this.getWorld().setBlockState(pos, Brush.sprayBlock(this.getWorld().getBlockState(pos), this.getColor())));
+                pos -> this.getWorld().setBlockState(pos, Brush.sprayBlock(this.getWorld(), pos, this.getWorld().getBlockState(pos), this.getColor())));
         this.kill();
     }
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         ShapeUtil.rhombus(HIT_ENTITY_SPRAY_SIZE, entityHitResult.getEntity().getBlockPos(), this.getMovementDirection(), this.getWorld(),
-                pos -> this.getWorld().setBlockState(pos, Brush.sprayBlock(this.getWorld().getBlockState(pos), this.getColor())));
+                pos -> this.getWorld().setBlockState(pos, Brush.sprayBlock(this.getWorld(), pos, this.getWorld().getBlockState(pos), this.getColor())));
         if (entityHitResult.getEntity() instanceof LivingEntity livingEntity){
             livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.DARKNESS, DARKNESS_TIME, 1), this.getOwner());
         }

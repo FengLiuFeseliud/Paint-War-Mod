@@ -1,9 +1,10 @@
 package fengliu.paintwar.paintwar.item.tool;
 
 import fengliu.paintwar.paintwar.item.ModItems;
+import fengliu.paintwar.paintwar.item.block.ModBlockItem;
 import fengliu.paintwar.paintwar.util.IdUtil;
 import fengliu.paintwar.paintwar.util.color.IColor;
-import fengliu.paintwar.paintwar.util.item.BaseItem;
+import fengliu.paintwar.paintwar.util.item.BaseBlockItem;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.ModelIds;
@@ -69,21 +70,6 @@ public class ColorPicker extends EmptyColorPicker implements IColor {
                 .offerTo(exporter);
     }
 
-    public boolean takeColor(List<BaseItem> colorItem, Slot slot, PlayerEntity player){
-        for(BaseItem item: colorItem){
-            if (!((IColor) item).getColor().equals(this.getColor())){
-                continue;
-            }
-
-            ItemStack stack = item.getDefaultStack();
-            EnchantmentHelper.fromNbt(slot.getStack().getEnchantments()).forEach(stack::addEnchantment);
-            slot.getStack().decrement(1);
-            player.getInventory().insertStack(stack);
-            return true;
-        }
-        return false;
-    }
-
     public boolean damageColor(Slot slot, ItemStack stack, PlayerEntity player){
         int slotCount = slot.getStack().getCount();
         if (!(stack.getDamage() + slotCount <= stack.getMaxDamage())) {
@@ -99,25 +85,57 @@ public class ColorPicker extends EmptyColorPicker implements IColor {
         return true;
     }
 
-    private boolean takeColorToTool(ItemStack slotStack, Slot slot, PlayerEntity player){
+    public <I extends Item> boolean takeColor(List<I> colorItem, ItemStack slotStack, PlayerEntity player){
+        for(Item item: colorItem){
+            if (item instanceof BaseBlockItem blockItem){
+                if (!(blockItem.getBlock() instanceof IColor iColor)){
+                    continue;
+                }
+                if (!iColor.getColor().equals(this.getColor())){
+                    continue;
+                }
+            } else {
+                if (!((IColor) item).getColor().equals(this.getColor())){
+                    continue;
+                }
+            }
+
+            ItemStack stack = new ItemStack(item, slotStack.getCount());
+            EnchantmentHelper.fromNbt(slotStack.getEnchantments()).forEach(stack::addEnchantment);
+            slotStack.decrement(slotStack.getCount());
+            player.getInventory().insertStack(stack);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean takeColorToTool(ItemStack slotStack, PlayerEntity player){
         if (slotStack.getItem() instanceof ColorPicker){
             return false;
         }
 
         if (slotStack.isOf(ModItems.EMPTY_SPRAY_GUN)){
-            return this.takeColor(ModItems.SPRAY_GUNS, slot, player);
+            return this.takeColor(ModItems.SPRAY_GUNS, slotStack, player);
         }
 
         if (slotStack.isOf(ModItems.EMPTY_BRUSH)){
-            return this.takeColor(ModItems.BRUSHS, slot, player);
+            return this.takeColor(ModItems.BRUSHS, slotStack, player);
         }
 
         if (slotStack.isOf(ModItems.EMPTY_WALL_GUN)){
-            return this.takeColor(ModItems.WALL_GUNS, slot, player);
+            return this.takeColor(ModItems.WALL_GUNS, slotStack, player);
         }
 
         if (slotStack.isOf(ModItems.SCATTER_COLOR_GUN)){
-            return this.takeColor(ModItems.COLOR_SCATTER_COLOR_GUNS, slot, player);
+            return this.takeColor(ModItems.COLOR_SCATTER_COLOR_GUNS, slotStack, player);
+        }
+
+        if (slotStack.isOf(ModItems.WATER_BALLOON)){
+            return this.takeColor(ModItems.COLOR_WATER_BALLOONS, slotStack, player);
+        }
+
+        if (slotStack.isOf(ModBlockItem.GRID_BRIDGE)){
+            return this.takeColor(ModBlockItem.GRID_BRIDGES, slotStack, player);
         }
         return false;
     }
@@ -125,7 +143,7 @@ public class ColorPicker extends EmptyColorPicker implements IColor {
     @Override
     public boolean onStackClicked(ItemStack stack, Slot slot, ClickType clickType, PlayerEntity player) {
         ItemStack slotStack = slot.getStack();
-        if ((slotStack.getItem() instanceof ColorPicker) && (stack.getItem() instanceof Brush || stack.getItem() instanceof SprayGun)){
+        if (slotStack.getItem() instanceof ColorPicker && (stack.getItem() instanceof SprayGun || stack.getItem() instanceof Brush)){
             return false;
         }
 
@@ -133,7 +151,7 @@ public class ColorPicker extends EmptyColorPicker implements IColor {
             return false;
         }
 
-        if (this.takeColorToTool(slotStack, slot, player)){
+        if (this.takeColorToTool(slotStack, player)){
             return false;
         }
 

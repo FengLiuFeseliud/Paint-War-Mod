@@ -2,7 +2,6 @@ package fengliu.paintwar.paintwar.item.tool;
 
 import fengliu.paintwar.paintwar.entity.thrown.WallShellEntity;
 import fengliu.paintwar.paintwar.item.ModItems;
-import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class EmptyWallGun extends BaseItem implements IColor {
+public class EmptyWallGun extends BaseItem {
     public static final int COOL_WALL_GUN_TIME = 80;
 
     public EmptyWallGun(Settings settings, String name) {
@@ -32,6 +31,10 @@ public class EmptyWallGun extends BaseItem implements IColor {
         super(settings, dyeColor, textureName);
     }
 
+    public DyeColor getColor(){
+        return null;
+    }
+
     public static void coolWallGun(PlayerEntity player){
         player.getItemCooldownManager().set(ModItems.EMPTY_WALL_GUN, COOL_WALL_GUN_TIME);
         for(Item item: ModItems.WALL_GUNS){
@@ -39,7 +42,7 @@ public class EmptyWallGun extends BaseItem implements IColor {
         }
     }
 
-    public static List<Block> getWallBlocks(PlayerEntity player, DyeColor blockColor){
+    public static List<Block> getWallBlocks(World world, PlayerEntity player, DyeColor blockColor){
         List<Block> blocks = new ArrayList<>();
         int needSize = WallShellEntity.HEIGHT_SIZE * WallShellEntity.WIDTH_SIZE;
         for (int index = 0; index < PlayerInventory.MAIN_SIZE + 9; index++) {
@@ -57,7 +60,7 @@ public class EmptyWallGun extends BaseItem implements IColor {
                 if (blocks.size() == needSize){
                     break;
                 }
-                blocks.add(Brush.sprayBlock(blockItem.getBlock().getDefaultState(), blockColor).getBlock());
+                blocks.add(Brush.sprayBlock(world, null, blockItem.getBlock().getDefaultState(), blockColor).getBlock());
                 stack.decrement(1);
             }
 
@@ -67,11 +70,6 @@ public class EmptyWallGun extends BaseItem implements IColor {
             break;
         }
         return blocks;
-    }
-
-    @Override
-    public DyeColor getColor() {
-        return null;
     }
 
     public WallShellEntity getShellEntity(World world, PlayerEntity player, List<Block> wallBlocks){
@@ -84,7 +82,7 @@ public class EmptyWallGun extends BaseItem implements IColor {
             return super.use(world, player, hand);
         }
 
-        List<Block> wallBlocks = EmptyWallGun.getWallBlocks(player, this.getColor());
+        List<Block> wallBlocks = EmptyWallGun.getWallBlocks(world, player, this.getColor());
         if (wallBlocks.isEmpty()){
             return super.use(world, player, hand);
         }

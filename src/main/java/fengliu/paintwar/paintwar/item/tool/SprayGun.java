@@ -41,7 +41,7 @@ public class SprayGun extends ColorPicker {
         for(int index = 1; index < 10; index++){
             BlockState oldBlock = context.getWorld().getBlockState(pos);
             if (!sprayBlocks.containsKey(oldBlock)){
-                sprayBlocks.put(oldBlock, Brush.sprayBlock(context.getWorld().getBlockState(pos), this.getColor()));
+                sprayBlocks.put(oldBlock, Brush.sprayBlock(context.getWorld(), context.getBlockPos(), context.getWorld().getBlockState(pos), this.getColor()));
             }
 
             context.getWorld().setBlockState(pos, sprayBlocks.get(oldBlock));
