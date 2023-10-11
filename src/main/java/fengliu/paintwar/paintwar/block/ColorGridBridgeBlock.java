@@ -19,7 +19,7 @@ public class ColorGridBridgeBlock extends GridBridgeBlock implements IColor {
 
     @Override
     public Identifier getModelId() {
-        return IdUtil.get(this.getPrefixedPath() + ((IModBlock) ModBlocks.GRID_BRIDGE).getTextureName());
+        return IdUtil.get(this.getPrefixedPath() + ((IModBlock) ModBlocks.GRID_BRIDGE_BLOCK).getTextureName());
     }
 
     @Override

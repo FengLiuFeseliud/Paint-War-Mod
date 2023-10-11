@@ -1,5 +1,6 @@
 package fengliu.paintwar.paintwar.item.tool;
 
+import fengliu.paintwar.paintwar.block.ModBlocks;
 import fengliu.paintwar.paintwar.item.ModItems;
 import fengliu.paintwar.paintwar.item.block.ModBlockItem;
 import fengliu.paintwar.paintwar.util.IdUtil;
@@ -7,6 +8,7 @@ import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.item.BaseBlockItem;
 import fengliu.paintwar.paintwar.util.item.IModItem;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.block.Block;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.ModelIds;
 import net.minecraft.data.client.TextureMap;
@@ -87,28 +89,23 @@ public class ColorPicker extends EmptyColorPicker implements IColor {
         return true;
     }
 
-    public <I extends Item> boolean takeColor(List<I> colorItem, ItemStack slotStack, PlayerEntity player){
-        for(Item item: colorItem){
-            if (item instanceof BlockItem blockItem && item instanceof IModItem){
-                if (!(blockItem.getBlock() instanceof IColor iColor)){
-                    continue;
-                }
-                if (!iColor.getColor().equals(this.getColor())){
-                    continue;
-                }
-            } else {
-                if (!((IColor) item).getColor().equals(this.getColor())){
-                    continue;
-                }
-            }
-
-            ItemStack stack = new ItemStack(item, slotStack.getCount());
-            EnchantmentHelper.fromNbt(slotStack.getEnchantments()).forEach(stack::addEnchantment);
-            slotStack.decrement(slotStack.getCount());
-            player.getInventory().insertStack(stack);
-            return true;
+    public <C extends IColor> boolean takeColor(List<C> colors, ItemStack slotStack, PlayerEntity player){
+        C take = IColor.getColor(colors, color);
+        if (take == null){
+            return false;
         }
-        return false;
+
+        ItemStack stack;
+        if (take instanceof Item item){
+            stack = new ItemStack(item, slotStack.getCount());
+        } else {
+            stack = new ItemStack(BlockItem.fromBlock((Block) take), slotStack.getCount());
+        }
+
+        EnchantmentHelper.fromNbt(slotStack.getEnchantments()).forEach(stack::addEnchantment);
+        slotStack.decrement(slotStack.getCount());
+        player.getInventory().insertStack(stack);
+        return true;
     }
 
     private boolean takeColorToTool(ItemStack slotStack, PlayerEntity player){
@@ -137,7 +134,11 @@ public class ColorPicker extends EmptyColorPicker implements IColor {
         }
 
         if (slotStack.isOf(ModBlockItem.GRID_BRIDGE)){
-            return this.takeColor(ModBlockItem.GRID_BRIDGES, slotStack, player);
+            return this.takeColor(ModBlocks.COLOR_GRID_BRIDGE_BLOCKS, slotStack, player);
+        }
+
+        if (slotStack.isOf(ModBlockItem.PAINT_DETECTOR)){
+            return this.takeColor(ModBlocks.COLOR_PAINT_DETECTOR_BLOCKS, slotStack, player);
         }
         return false;
     }

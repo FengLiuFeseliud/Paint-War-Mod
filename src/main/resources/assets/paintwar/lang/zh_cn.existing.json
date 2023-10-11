@@ -56,5 +56,8 @@
     "block.item.paintwar.grid_bridge.tooltip": "网格架, 可以在上面行走, 好像可以设置颜色?",
 
     "block.paintwar.color_grid_bridge": "网格架",
-    "block.item.paintwar.color_grid_bridge.tooltip": "让颜料可以从网格中流下, 使颜料不会改变这个方块颜色"
+    "block.item.paintwar.color_grid_bridge.tooltip": "让颜料可以从网格中流下, 使颜料不会改变这个方块颜色",
+
+    "block.paintwar.paint_detector": "颜料检测器",
+    "block.paintwar.color_paint_detector": "颜料检测器"
 }

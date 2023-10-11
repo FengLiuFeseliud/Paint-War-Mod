@@ -4,9 +4,7 @@ import fengliu.paintwar.paintwar.util.IdUtil;
 import fengliu.paintwar.paintwar.util.color.IColor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.Model;
-import net.minecraft.data.client.TextureMap;
+import net.minecraft.data.client.*;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
@@ -38,10 +36,6 @@ public interface IModBlock {
      * @return 模型 Identifier
      */
     default Identifier getModelId(){
-//        if (this instanceof IColor color){
-//            return IdUtil.get(this.getPrefixedPath() + this.getTextureName());
-//        }
-
         return IdUtil.get(this.getPrefixedPath() + this.getTextureName());
     }
 
@@ -71,7 +65,9 @@ public interface IModBlock {
      * @param blockStateModelGenerator 方块状态模型生成器
      */
     default void generateBlockStateModel(BlockStateModelGenerator blockStateModelGenerator){
-
+        blockStateModelGenerator.blockStateCollector.accept(
+                VariantsBlockStateSupplier.create((Block) this,
+                        BlockStateVariant.create().put(VariantSettings.MODEL, this.getModelId())));
     }
 
     /**

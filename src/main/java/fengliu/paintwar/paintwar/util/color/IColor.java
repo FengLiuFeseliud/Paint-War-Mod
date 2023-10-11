@@ -1,9 +1,13 @@
 package fengliu.paintwar.paintwar.util.color;
 
 import fengliu.paintwar.paintwar.util.RegisterUtil;
+import fengliu.paintwar.paintwar.util.block.IModBlock;
+import fengliu.paintwar.paintwar.util.item.IModItem;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.DyeColor;
+
+import java.util.List;
 
 /**
  * 实现 {@link IColor} 接口表示该 物品/方块 有多个颜色, 将在数据生成时创建不同颜色的版本
@@ -28,4 +32,14 @@ public interface IColor {
      * @return 材质名
      */
     String getTextureName();
+
+    static <C extends IColor> C getColor(List<C> colors, DyeColor color){
+        for(C iColor: colors){
+            if (!iColor.getColor().equals(color)){
+                continue;
+            }
+            return iColor;
+        }
+        return null;
+    }
 }

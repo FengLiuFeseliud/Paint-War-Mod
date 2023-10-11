@@ -13,13 +13,15 @@ import net.minecraft.client.render.RenderLayer;
 import java.util.List;
 
 public class ModBlocks {
-    public static final GridBridgeBlock GRID_BRIDGE = register(new GridBridgeBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool().nonOpaque(), "grid_bridge"));
-    public static final List<ColorGridBridgeBlock> GRID_BRIDGES = RegisterUtil.registerColorBlocks(dyeColor -> new ColorGridBridgeBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool().nonOpaque(), dyeColor, "color_grid_bridge"));
+    public static final GridBridgeBlock GRID_BRIDGE_BLOCK = register(new GridBridgeBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool().nonOpaque(), "grid_bridge"));
+    public static final List<ColorGridBridgeBlock> COLOR_GRID_BRIDGE_BLOCKS = RegisterUtil.registerColorBlocks(dyeColor -> new ColorGridBridgeBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool().nonOpaque(), dyeColor, "color_grid_bridge"));
+    public static final PaintDetectorBlock PAINT_DETECTOR_BLOCK = register(new PaintDetectorBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool().nonOpaque(), "paint_detector"));
+    public static final List<ColorPaintDetectorBlock> COLOR_PAINT_DETECTOR_BLOCKS = RegisterUtil.registerColorBlocks(dyeColor -> new ColorPaintDetectorBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool().nonOpaque(), dyeColor, "color_paint_detector"));
 
     @Environment(EnvType.CLIENT)
     public static void setAllBlockRenderLayerMap(){
-        BlockRenderLayerMap.INSTANCE.putBlock(GRID_BRIDGE, RenderLayer.getTranslucent());
-        GRID_BRIDGES.forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent()));
+        BlockRenderLayerMap.INSTANCE.putBlock(GRID_BRIDGE_BLOCK, RenderLayer.getTranslucent());
+        COLOR_GRID_BRIDGE_BLOCKS.forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent()));
     };
 
     public static <B extends Block & IModBlock> B register(B block){

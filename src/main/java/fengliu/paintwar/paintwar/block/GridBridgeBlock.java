@@ -34,13 +34,6 @@ public class GridBridgeBlock extends FacingBlock {
 
     @Override
     public BlockState onSprayBlock(World world, BlockPos pos, BlockState blockState, DyeColor color, boolean sprayBlock) {
-        for (Block block: ModBlocks.GRID_BRIDGES){
-            if (!((IColor) block).getColor().equals(color)){
-                continue;
-            }
-
-            return block.getDefaultState().with(FacingBlock.FACING, blockState.get(FACING));
-        }
-        return blockState;
+        return IColor.getColor(ModBlocks.COLOR_GRID_BRIDGE_BLOCKS, color).getDefaultState();
     }
 }

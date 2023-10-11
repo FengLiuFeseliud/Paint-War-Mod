@@ -5,6 +5,7 @@ import fengliu.paintwar.paintwar.util.SpawnUtil;
 import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,10 +35,11 @@ public class EmptyColorPicker extends BaseItem {
                 continue;
             }
 
-            ItemStack colorPickerItem = item.getDefaultStack();
-            colorPickerItem.setDamage(player.getStackInHand(hand).getDamage());
+            ItemStack oldStack = player.getStackInHand(hand);
+            ItemStack stack = item.getDefaultStack();
+            EnchantmentHelper.fromNbt(oldStack.getEnchantments()).forEach(stack::addEnchantment);
 
-            player.setStackInHand(hand, colorPickerItem);
+            player.setStackInHand(hand, stack);
             break;
         }
     }
