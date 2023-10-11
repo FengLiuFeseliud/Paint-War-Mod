@@ -1,7 +1,6 @@
 package fengliu.paintwar.paintwar.util.entity;
 
 import fengliu.paintwar.paintwar.util.color.IColor;
-import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -37,7 +36,7 @@ public abstract class ColorItemThrownEntity extends ThrownItemEntity {
     /**
      * 该物品所有颜色物品
      */
-    public abstract List<BaseItem> getColorItems();
+    public abstract List<? extends IColor> getColorItems();
 
     /**
      * 默认颜色物品, 默认为所有颜色物品第一个
@@ -45,7 +44,7 @@ public abstract class ColorItemThrownEntity extends ThrownItemEntity {
      */
     @Override
     protected Item getDefaultItem() {
-        return this.getColorItems().get(0);
+        return (Item) this.getColorItems().get(0);
     }
 
     /**
@@ -53,12 +52,12 @@ public abstract class ColorItemThrownEntity extends ThrownItemEntity {
      */
     @Override
     public ItemStack getStack() {
-        for(Item item: this.getColorItems()){
-            if (!((IColor) item).getColor().equals(this.getColor())){
+        for(IColor item: this.getColorItems()){
+            if (!item.getColor().equals(this.getColor())){
                 continue;
             }
 
-            return new ItemStack(item);
+            return new ItemStack((Item) item);
         }
         return new ItemStack(this.getDefaultItem());
     }

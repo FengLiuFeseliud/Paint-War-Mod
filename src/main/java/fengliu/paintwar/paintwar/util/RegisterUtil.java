@@ -1,14 +1,14 @@
 package fengliu.paintwar.paintwar.util;
 
-import fengliu.paintwar.paintwar.util.block.BaseBlock;
-import fengliu.paintwar.paintwar.util.item.BaseBlockItem;
+import fengliu.paintwar.paintwar.util.block.IModBlock;
+import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.item.BaseItem;
+import fengliu.paintwar.paintwar.util.item.IModItem;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -19,40 +19,25 @@ import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 
 public class RegisterUtil {
     /**
-     * 支持生成的物品模型
-     */
-    public enum Model{
-        GENERATED,
-        PARENT;
-    }
-
-    /**
-     * 需要生成模型的物品表, 数据生成参考 {@link fengliu.paintwar.paintwar.data.generation.ModelsDataGeneration#generateItemModels(ItemModelGenerator) generateItemModels}
-     */
-    public static final Map<Item, Model> ITEM_MODEL = new HashMap<>();
-    /**
      * 统计被注册的物品列表, 用于数据生成, 数据生成参考 {@link fengliu.paintwar.paintwar.data.generation.LangGeneration#generateTranslations(FabricLanguageProvider.TranslationBuilder) generateTranslations} {@link fengliu.paintwar.paintwar.data.generation.RecipeGenerator#generate(Consumer) generateRecipe}
      */
-    public static final List<Item> ITEMS = new ArrayList<>();
+    public static final List<IModItem> ITEMS = new ArrayList<>();
     /**
      * 统计被注册的方块列表, 用于数据生成, 数据生成参考 {@link fengliu.paintwar.paintwar.data.generation.ModelsDataGeneration#generateBlockStateModels(BlockStateModelGenerator) generateBlockStateModels}
      */
-    public static final List<Block> BLOCKS = new ArrayList<>();
+    public static final List<IModBlock> BLOCKS = new ArrayList<>();
 
 
     /**
      * 注册物品
      */
-    public static <I extends Item> I registerItem(Identifier id, I item, ItemGroup group, Model model){
-        ITEM_MODEL.put(item, model);
-        ITEMS.add(item);
+    public static <I extends Item> I registerItem(Identifier id, I item, ItemGroup group){
+        ITEMS.add((IModItem) item);
         ItemGroupEvents.modifyEntriesEvent(group).register(content -> content.add(item.getDefaultStack()));
         return Registry.register(Registries.ITEM, id, item);
     }
@@ -60,53 +45,53 @@ public class RegisterUtil {
     /**
      * 注册物品
      */
-    public static <I extends Item> I registerItem(String id, I item, ItemGroup group, Model model){
-        return RegisterUtil.registerItem(IdUtil.get(id), item, group, model);
+    public static <I extends Item> I registerItem(String id, I item, ItemGroup group){
+        return RegisterUtil.registerItem(IdUtil.get(id), item, group);
     }
 
     /**
      * 注册方块物品
      */
-    public static <BI extends BlockItem> BI registerBlockItem(BI item, ItemGroup group, Model model){
-        return RegisterUtil.registerItem(IdUtil.get(((BaseBlock) item.getBlock()).getBlockName()), item, group, model);
+    public static <BI extends BlockItem & IModItem> BI registerBlockItem(BI item, ItemGroup group){
+        return RegisterUtil.registerItem(IdUtil.get(((IModBlock) item.getBlock()).getBlockName()), item, group);
     }
 
-    public interface registerItem{
-        BaseBlockItem get(BaseBlock block);
+    public interface registerItem<BI extends BlockItem & IModItem>{
+        <B extends Block & IModBlock> BI get(B block);
     }
 
     /**
-     * 注册多个方块物品, {@link registerItem#get(BaseBlock) register} 传入当前正在注册方块, 返回 {@link BaseBlockItem} 完成方块物品创建
+     * 注册多个方块物品, {@link registerItem#get(Block)} ) register} 传入当前正在注册方块, 返回 {@link Item} 完成方块物品创建
      */
-    public static List<BaseBlockItem> registerBlockItems(List<BaseBlock> blocks, registerItem register, ItemGroup group){
-        List<BaseBlockItem> baseBlockItems = new ArrayList<>();
+    public static <B extends Block & IModBlock, BI extends BlockItem & IModItem> List<BI> registerBlockItems(List<B> blocks, registerItem<BI> register, ItemGroup group){
+        List<BI> blockItems = new ArrayList<>();
         blocks.forEach(block -> {
-            BaseBlockItem blockItem = register.get(block);
-            if (block.getColor() != null){
+            BI blockItem = register.get(block);
+            if (blockItem.getBlock() instanceof IColor color){
                 try {
-                    ColorProviderRegistry.ITEM.register((stack, tintIndex) -> block.getColor().getMapColor().color, blockItem);
-                } catch (RuntimeException ignored){
+                    ColorProviderRegistry.ITEM.register((stack, tintIndex) -> color.getColor().getMapColor().color, blockItem);
+                } catch (RuntimeException ignored) {
 
                 }
             }
 
-            baseBlockItems.add(RegisterUtil.registerItem(IdUtil.get(((BaseBlock) blockItem.getBlock()).getBlockName()), blockItem, group, Model.PARENT));
+            blockItems.add(RegisterUtil.registerItem(IdUtil.get(((IModBlock) blockItem.getBlock()).getBlockName()), blockItem, group));
         });
-        return baseBlockItems;
+        return blockItems;
     }
 
 
-    public interface colorItem{
-        BaseItem get(DyeColor dyeColor);
+    public interface colorItem<I extends Item & IModItem & IColor>{
+        I get(DyeColor dyeColor);
     }
 
     /**
      * 注册 16色 颜色物品, {@link colorItem#get(DyeColor) colorItem} 传入当前正在注册物品颜色, 返回 {@link BaseItem} 完成方块创建
      */
-    public static List<BaseItem> registerColorItems(colorItem colorItem, @Nullable ItemGroup group){
-        List<BaseItem> items = new ArrayList<>();
+    public static <I extends Item & IModItem & IColor> List<I> registerColorItems(colorItem<I> colorItem, @Nullable ItemGroup group){
+        List<I> items = new ArrayList<>();
         for (DyeColor dyeColor: DyeColor.values()){
-            BaseItem item = colorItem.get(dyeColor);
+            I item = colorItem.get(dyeColor);
             try {
                 ColorProviderRegistry.ITEM.register((stack, tintIndex) -> dyeColor.getMapColor().color, item);
             } catch (RuntimeException ignored){
@@ -117,7 +102,7 @@ public class RegisterUtil {
                 continue;
             }
 
-            items.add(RegisterUtil.registerItem(item.name, item, group, Model.GENERATED));
+            items.add(RegisterUtil.registerItem(item.getItemName(), item, group));
         }
         return items;
     }
@@ -125,22 +110,26 @@ public class RegisterUtil {
     /**
      * 注册方块
      */
-    public static BaseBlock registerBlock(BaseBlock block) {
+    public static <B extends Block & IModBlock> B registerBlock(B block) {
         BLOCKS.add(block);
         return Registry.register(Registries.BLOCK, IdUtil.get(block.getBlockName()), block);
     }
 
-    public interface colorBlock{
-        BaseBlock get(DyeColor dyeColor);
+    public interface colorBlock<B extends Block & IModBlock>{
+        B get(DyeColor dyeColor);
     }
 
     /**
-     * 注册 16色 颜色方块, {@link colorItem#get(DyeColor) colorItem} 传入当前正在注册方块颜色, 返回 {@link BaseBlock} 完成方块创建
+     * 注册 16色 颜色方块, {@link colorItem#get(DyeColor) colorItem} 传入当前正在注册方块颜色, 返回 {@link Block} 完成方块创建
      */
-    public static List<BaseBlock> registerColorBlocks(colorBlock colorBlock){
-        List<BaseBlock> blocks = new ArrayList<>();
+    public static <B extends Block & IModBlock> List<B> registerColorBlocks(colorBlock<B> colorBlock){
+        List<B> blocks = new ArrayList<>();
         for (DyeColor dyeColor: DyeColor.values()){
-            BaseBlock block = colorBlock.get(dyeColor);
+            B block = colorBlock.get(dyeColor);
+            if (!(block instanceof IColor)){
+                continue;
+            }
+
             try {
                 ColorProviderRegistry.ITEM.BLOCK.register((state, world, pos, tintIndex) -> dyeColor.getFireworkColor(), block);
             } catch (RuntimeException ignored){

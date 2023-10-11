@@ -2,6 +2,7 @@ package fengliu.paintwar.paintwar.block;
 
 import fengliu.paintwar.paintwar.item.tool.Brush;
 import fengliu.paintwar.paintwar.util.IdUtil;
+import fengliu.paintwar.paintwar.util.block.IModBlock;
 import fengliu.paintwar.paintwar.util.color.IColor;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -18,7 +19,7 @@ public class ColorGridBridgeBlock extends GridBridgeBlock implements IColor {
 
     @Override
     public Identifier getModelId() {
-        return IdUtil.get(this.getPrefixedPath() + ModBlocks.GRID_BRIDGE.getTextureName());
+        return IdUtil.get(this.getPrefixedPath() + ((IModBlock) ModBlocks.GRID_BRIDGE).getTextureName());
     }
 
     @Override

@@ -2,6 +2,7 @@ package fengliu.paintwar.paintwar.item.tool;
 
 import fengliu.paintwar.paintwar.item.ModItems;
 import fengliu.paintwar.paintwar.util.block.BaseBlock;
+import fengliu.paintwar.paintwar.util.block.IModBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
@@ -36,7 +37,7 @@ public class Brush extends ColorPicker {
             return blockState;
         }
 
-        if (blockState.getBlock() instanceof BaseBlock block){
+        if (blockState.getBlock() instanceof IModBlock block){
             if (!block.canSprayBlock()){
                 return block.onSprayBlock(world, pos, blockState, color, false);
             }

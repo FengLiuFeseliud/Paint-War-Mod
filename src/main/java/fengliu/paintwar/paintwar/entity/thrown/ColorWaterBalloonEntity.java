@@ -4,8 +4,8 @@ import fengliu.paintwar.paintwar.entity.ModEntitys;
 import fengliu.paintwar.paintwar.item.ModItems;
 import fengliu.paintwar.paintwar.item.tool.Brush;
 import fengliu.paintwar.paintwar.util.ShapeUtil;
+import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.entity.ColorItemThrownEntity;
-import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -34,7 +34,7 @@ public class ColorWaterBalloonEntity extends ColorItemThrownEntity {
     }
 
     @Override
-    public List<BaseItem> getColorItems() {
+    public List<? extends IColor> getColorItems() {
         return ModItems.COLOR_WATER_BALLOONS;
     }
 

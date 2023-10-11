@@ -1,7 +1,7 @@
 package fengliu.paintwar.paintwar.block;
 
-import fengliu.paintwar.paintwar.util.block.BaseBlock;
 import fengliu.paintwar.paintwar.util.block.FacingBlock;
+import fengliu.paintwar.paintwar.util.color.IColor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -34,8 +34,8 @@ public class GridBridgeBlock extends FacingBlock {
 
     @Override
     public BlockState onSprayBlock(World world, BlockPos pos, BlockState blockState, DyeColor color, boolean sprayBlock) {
-        for (BaseBlock block: ModBlocks.GRID_BRIDGES){
-            if (!block.getColor().equals(color)){
+        for (Block block: ModBlocks.GRID_BRIDGES){
+            if (!((IColor) block).getColor().equals(color)){
                 continue;
             }
 

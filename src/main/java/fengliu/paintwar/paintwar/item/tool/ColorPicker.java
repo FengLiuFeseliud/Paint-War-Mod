@@ -5,6 +5,7 @@ import fengliu.paintwar.paintwar.item.block.ModBlockItem;
 import fengliu.paintwar.paintwar.util.IdUtil;
 import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.item.BaseBlockItem;
+import fengliu.paintwar.paintwar.util.item.IModItem;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.ModelIds;
@@ -13,6 +14,7 @@ import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.DyeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -87,7 +89,7 @@ public class ColorPicker extends EmptyColorPicker implements IColor {
 
     public <I extends Item> boolean takeColor(List<I> colorItem, ItemStack slotStack, PlayerEntity player){
         for(Item item: colorItem){
-            if (item instanceof BaseBlockItem blockItem){
+            if (item instanceof BlockItem blockItem && item instanceof IModItem){
                 if (!(blockItem.getBlock() instanceof IColor iColor)){
                     continue;
                 }

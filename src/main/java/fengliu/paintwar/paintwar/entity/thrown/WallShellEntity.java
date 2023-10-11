@@ -3,8 +3,8 @@ package fengliu.paintwar.paintwar.entity.thrown;
 import fengliu.paintwar.paintwar.entity.ModEntitys;
 import fengliu.paintwar.paintwar.item.ModItems;
 import fengliu.paintwar.paintwar.util.ShapeUtil;
+import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.entity.ColorItemThrownEntity;
-import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
@@ -48,7 +48,7 @@ public class WallShellEntity extends ColorItemThrownEntity {
     }
 
     @Override
-    public List<BaseItem> getColorItems() {
+    public List<? extends IColor> getColorItems() {
         return ModItems.WALL_SHELLS;
     }
 

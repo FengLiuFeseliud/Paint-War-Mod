@@ -8,6 +8,7 @@ import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.item.BaseBlockItem;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 
 import java.io.IOException;
@@ -69,7 +70,7 @@ public class LangGeneration extends FabricLanguageProvider {
         RegisterUtil.ITEMS.forEach(item -> {
             String translationKey = null;
             try {
-                if (item instanceof BaseBlockItem blockItem){
+                if (item instanceof BlockItem blockItem){
                     if (!(blockItem.getBlock() instanceof IColor color)){
                         return;
                     }

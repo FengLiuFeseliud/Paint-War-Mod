@@ -3,8 +3,8 @@ package fengliu.paintwar.paintwar.entity.thrown;
 import fengliu.paintwar.paintwar.entity.ModEntitys;
 import fengliu.paintwar.paintwar.item.ModItems;
 import fengliu.paintwar.paintwar.util.ShapeUtil;
+import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.entity.ColorItemPersistentThrownEntity;
-import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
@@ -34,7 +34,7 @@ public class PaintSmokeBombEntity extends ColorItemPersistentThrownEntity {
     }
 
     @Override
-    public List<BaseItem> getColorItems() {
+    public List<? extends IColor> getColorItems() {
         return ModItems.PAINT_SMOKE_BOMBS;
     }
 

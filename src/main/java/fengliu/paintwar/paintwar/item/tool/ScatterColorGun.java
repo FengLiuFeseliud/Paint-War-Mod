@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -55,7 +56,7 @@ public class ScatterColorGun extends BaseItem {
             return shell;
         }
 
-        for (BaseItem item: ModItems.COLOR_WATER_BALLOONS){
+        for (Item item: ModItems.COLOR_WATER_BALLOONS){
             if (!this.getColor().equals(((IColor) item).getColor())){
                 continue;
             }
@@ -143,7 +144,7 @@ public class ScatterColorGun extends BaseItem {
             yaw[0] = yaw[0] + YAW_OFFSET;
         })){
             user.getItemCooldownManager().set(this, COOL_TIME);
-            for (BaseItem item: ModItems.COLOR_SCATTER_COLOR_GUNS){
+            for (Item item: ModItems.COLOR_SCATTER_COLOR_GUNS){
                 user.getItemCooldownManager().set(item, COOL_TIME);
             }
             EmptyWallGun.coolWallGun(user);

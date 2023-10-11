@@ -4,7 +4,6 @@ import fengliu.paintwar.paintwar.entity.thrown.WallShellEntity;
 import fengliu.paintwar.paintwar.item.ModItems;
 import fengliu.paintwar.paintwar.util.IdUtil;
 import fengliu.paintwar.paintwar.util.color.IColor;
-import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Block;
 import net.minecraft.data.client.ItemModelGenerator;
@@ -77,7 +76,7 @@ public class WallGun extends EmptyWallGun implements IColor {
             return wallShell;
         }
 
-        for(BaseItem item: ModItems.WALL_SHELLS){
+        for(Item item: ModItems.WALL_SHELLS){
             if (!((IColor) item).getColor().equals(dyeColor)){
                 continue;
             }
