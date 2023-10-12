@@ -74,7 +74,6 @@ public class EmptyColorPicker extends BaseItem {
             return super.use(world, user, hand);
         }
 
-
         EmptyColorPicker.pickerColorInHand(
                 Registries.BLOCK.getId(world.getBlockState(hitResult.getBlockPos()).getBlock()).getPath(),
                 user,

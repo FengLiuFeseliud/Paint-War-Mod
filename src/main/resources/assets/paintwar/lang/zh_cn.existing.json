@@ -59,5 +59,14 @@
     "block.item.paintwar.color_grid_bridge.tooltip": "让颜料可以从网格中流下, 使颜料不会改变这个方块颜色",
 
     "block.paintwar.paint_detector": "颜料检测器",
-    "block.paintwar.color_paint_detector": "颜料检测器"
+    "block.item.paintwar.paint_detector.tooltip": "检测颜料, 根据颜料输出红石信号, 好像可以设置颜色?",
+
+    "block.paintwar.color_paint_detector": "颜料检测器",
+    "block.item.paintwar.color_paint_detector.tooltip": "检测颜料, 根据颜料输出红石信号",
+
+    "block.paintwar.no_color_door":"颜料门",
+    "block.item.paintwar.no_color_door.tooltip":"颜料染色的门, 使用对应颜色的钥匙才能打开, 好像可以设置颜色?",
+
+    "block.paintwar.color_door": "颜料门",
+    "block.item.paintwar.color_door.tooltip":"颜料染色的门, 使用对应颜色的钥匙才能打开"
 }

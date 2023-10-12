@@ -7,6 +7,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSetType;
 import net.minecraft.block.Material;
 import net.minecraft.client.render.RenderLayer;
 
@@ -17,11 +18,15 @@ public class ModBlocks {
     public static final List<ColorGridBridgeBlock> COLOR_GRID_BRIDGE_BLOCKS = RegisterUtil.registerColorBlocks(dyeColor -> new ColorGridBridgeBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool().nonOpaque(), dyeColor, "color_grid_bridge"));
     public static final PaintDetectorBlock PAINT_DETECTOR_BLOCK = register(new PaintDetectorBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool().nonOpaque(), "paint_detector"));
     public static final List<ColorPaintDetectorBlock> COLOR_PAINT_DETECTOR_BLOCKS = RegisterUtil.registerColorBlocks(dyeColor -> new ColorPaintDetectorBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool().nonOpaque(), dyeColor, "color_paint_detector"));
+    public static final NoColorDoorBlock NO_COLOR_DOOR_BLOCK = register(new NoColorDoorBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool().nonOpaque(), BlockSetType.STONE, "no_color_door"));
+    public static final List<ColorDoorBlock> COLOR_DOOR_BLOCKS = RegisterUtil.registerColorBlocks(dyeColor -> new ColorDoorBlock(FabricBlockSettings.of(Material.STONE).strength(5.0f).requiresTool().nonOpaque(), BlockSetType.STONE,  dyeColor, "color_door"));
 
     @Environment(EnvType.CLIENT)
     public static void setAllBlockRenderLayerMap(){
         BlockRenderLayerMap.INSTANCE.putBlock(GRID_BRIDGE_BLOCK, RenderLayer.getTranslucent());
         COLOR_GRID_BRIDGE_BLOCKS.forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent()));
+        BlockRenderLayerMap.INSTANCE.putBlock(NO_COLOR_DOOR_BLOCK, RenderLayer.getTranslucent());
+        COLOR_DOOR_BLOCKS.forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getTranslucent()));
     };
 
     public static <B extends Block & IModBlock> B register(B block){

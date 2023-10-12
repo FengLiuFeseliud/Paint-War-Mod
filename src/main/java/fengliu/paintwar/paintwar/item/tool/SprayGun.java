@@ -44,7 +44,7 @@ public class SprayGun extends ColorPicker {
                 sprayBlocks.put(oldBlock, Brush.sprayBlock(context.getWorld(), context.getBlockPos(), context.getWorld().getBlockState(pos), this.getColor()));
             }
 
-            context.getWorld().setBlockState(pos, sprayBlocks.get(oldBlock));
+            Brush.spray(context.getWorld(), pos, sprayBlocks.get(oldBlock));
             pos = pos.east();
             if (index % 3 == 0){
                 pos = pos.west(3).south();

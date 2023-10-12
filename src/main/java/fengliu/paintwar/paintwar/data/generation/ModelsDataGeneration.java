@@ -2,6 +2,7 @@ package fengliu.paintwar.paintwar.data.generation;
 
 import fengliu.paintwar.paintwar.util.RegisterUtil;
 import fengliu.paintwar.paintwar.util.block.BaseBlock;
+import fengliu.paintwar.paintwar.util.block.IModBlock;
 import fengliu.paintwar.paintwar.util.item.BaseBlockItem;
 import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -25,19 +26,15 @@ public class ModelsDataGeneration extends FabricModelProvider {
     /**
      * 生成块模型与块状态
      * <p>
-     * 通过调用 {@link BaseBlock#generateBlockStateModel(BlockStateModelGenerator) generateBlockStateModel} 生成块状态
+     * 通过调用 {@link IModBlock#generateBlockStateModel(BlockStateModelGenerator) generateBlockStateModel} 生成块状态
      * <p>
-     * 通过调用 {@link BaseBlock#generateBlockModel(BlockStateModelGenerator) generateBlockModel} 生成块模型
+     * 通过调用 {@link IModBlock#generateBlockModel(BlockStateModelGenerator) generateBlockModel} 生成块模型
      */
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         RegisterUtil.BLOCKS.forEach(block -> {
-            if (!(block instanceof BaseBlock baseBlock)){
-                return;
-            }
-
-            baseBlock.generateBlockStateModel(blockStateModelGenerator);
-            baseBlock.generateBlockModel(blockStateModelGenerator);
+            block.generateBlockStateModel(blockStateModelGenerator);
+            block.generateBlockModel(blockStateModelGenerator);
         });
     }
 

@@ -140,6 +140,10 @@ public class ColorPicker extends EmptyColorPicker implements IColor {
         if (slotStack.isOf(ModBlockItem.PAINT_DETECTOR)){
             return this.takeColor(ModBlocks.COLOR_PAINT_DETECTOR_BLOCKS, slotStack, player);
         }
+
+        if (slotStack.isOf(ModBlockItem.NO_COLOR_DOOR)){
+            return this.takeColor(ModBlocks.COLOR_DOOR_BLOCKS, slotStack, player);
+        }
         return false;
     }
 

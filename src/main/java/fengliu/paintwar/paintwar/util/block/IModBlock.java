@@ -80,7 +80,7 @@ public interface IModBlock {
         }
 
         // 指向父级模型
-        Identifier modelId = IdUtil.get(this.getPrefixedPath() + this.getTextureName());
+        Identifier modelId = this.getModelId();
         new Model(Optional.of(modelId), Optional.empty())
                 .upload((Block) this, TextureMap.all(modelId), blockStateModelGenerator.modelCollector);
     }

@@ -35,6 +35,9 @@ public class PaintDetectorBlock extends BaseBlock {
 
     @Override
     public int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
+        if (!this.emitsRedstonePower(state)){
+            return 0;
+        }
         return this.getColor().getId();
     }
 }

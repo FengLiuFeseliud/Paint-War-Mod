@@ -4,6 +4,8 @@ import fengliu.paintwar.paintwar.item.ModItems;
 import fengliu.paintwar.paintwar.util.block.BaseBlock;
 import fengliu.paintwar.paintwar.util.block.IModBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.DoorBlock;
+import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.registry.Registries;
@@ -32,6 +34,14 @@ public class Brush extends ColorPicker {
         return ModItems.EMPTY_BRUSH;
     }
 
+    /**
+     * 获取修改颜色后的方块
+     * @param world 世界
+     * @param pos 方块坐标
+     * @param blockState 修改方块
+     * @param color 需修改为的颜色
+     * @return 修改颜色后的方块
+     */
     public static BlockState sprayBlock(World world, @Nullable BlockPos pos, BlockState blockState, @Nullable DyeColor color) {
         if (color == null){
             return blockState;
@@ -64,9 +74,35 @@ public class Brush extends ColorPicker {
         return blockState;
     }
 
+    /**
+     * 修改方块
+     * @param world 世界
+     * @param pos 方块坐标
+     * @param sprayBlock 目标修改为方块
+     */
+    public static void spray(World world, BlockPos pos, BlockState sprayBlock){
+        if (sprayBlock.isAir()){
+            return;
+        }
+
+        if (!(sprayBlock.getBlock() instanceof DoorBlock)){
+            world.setBlockState(pos, sprayBlock);
+            return;
+        }
+
+        // 修改门颜色时不产生更新, 有更新门就修改不了了
+        BlockState doorState = world.getBlockState(pos);
+        world.setBlockState(pos, sprayBlock.getBlock().getStateWithProperties(doorState), 3, 0);
+        if (doorState.get(DoorBlock.HALF).equals(DoubleBlockHalf.LOWER)){
+            world.setBlockState(pos.up(), sprayBlock.getBlock().getStateWithProperties(world.getBlockState(pos.up())), 3, 0);
+        } else {
+            world.setBlockState(pos.down(), sprayBlock.getBlock().getStateWithProperties(world.getBlockState(pos.down())), 3, 0);
+        }
+    }
+
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        context.getWorld().setBlockState(context.getBlockPos(), Brush.sprayBlock(context.getWorld(), context.getBlockPos(), context.getWorld().getBlockState(context.getBlockPos()), this.getColor()));
+        Brush.spray(context.getWorld(), context.getBlockPos(),  Brush.sprayBlock(context.getWorld(), context.getBlockPos(), context.getWorld().getBlockState(context.getBlockPos()), this.getColor()));
         if (context.getWorld().isClient()) {
             return ActionResult.SUCCESS;
         }
