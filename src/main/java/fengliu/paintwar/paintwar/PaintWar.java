@@ -4,6 +4,7 @@ import fengliu.paintwar.paintwar.block.ModBlocks;
 import fengliu.paintwar.paintwar.entity.ModEntitys;
 import fengliu.paintwar.paintwar.item.ModItems;
 import fengliu.paintwar.paintwar.item.block.ModBlockItem;
+import fengliu.paintwar.paintwar.sound.ModSoundEvents;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,5 +20,7 @@ public class PaintWar implements ModInitializer {
 
         ModBlocks.registerAllBlock();
         ModEntitys.registerAllEntity();
+
+        ModSoundEvents.registerAllSoundEvent();
     }
 }

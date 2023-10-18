@@ -3,6 +3,7 @@ package fengliu.paintwar.paintwar.entity.thrown;
 import fengliu.paintwar.paintwar.entity.ModEntitys;
 import fengliu.paintwar.paintwar.item.ModItems;
 import fengliu.paintwar.paintwar.item.tool.Brush;
+import fengliu.paintwar.paintwar.sound.ModSoundEvents;
 import fengliu.paintwar.paintwar.util.ShapeUtil;
 import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.entity.ColorItemThrownEntity;
@@ -12,6 +13,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -41,6 +43,7 @@ public class ColorWaterBalloonEntity extends ColorItemThrownEntity {
     @Override
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
+        this.world.playSound(null, hitResult.getPos().getX(), hitResult.getPos().getY(), hitResult.getPos().getZ(), ModSoundEvents.ENTITY_THROW_LAND_BALLOON, SoundCategory.BLOCKS, 0.5F, 1.0F);
         if (this.world.isClient || hitResult.getType() == HitResult.Type.ENTITY){
             return;
         }
@@ -52,6 +55,7 @@ public class ColorWaterBalloonEntity extends ColorItemThrownEntity {
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
+        this.world.playSound(null, entityHitResult.getPos().getX(), entityHitResult.getPos().getY(), entityHitResult.getPos().getZ(), ModSoundEvents.ENTITY_THROW_LAND_BALLOON, SoundCategory.BLOCKS, 0.5F, 1.0F);
         ShapeUtil.rhombus(HIT_ENTITY_SPRAY_SIZE, entityHitResult.getEntity().getBlockPos(), this.getMovementDirection(), this.getWorld(),
                 pos -> Brush.spray(this.getWorld(), pos, Brush.sprayBlock(this.getWorld(), pos, this.getWorld().getBlockState(pos), this.getColor())));
         if (entityHitResult.getEntity() instanceof LivingEntity livingEntity){

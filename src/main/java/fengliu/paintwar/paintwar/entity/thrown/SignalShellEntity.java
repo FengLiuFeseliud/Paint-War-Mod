@@ -2,12 +2,14 @@ package fengliu.paintwar.paintwar.entity.thrown;
 
 import fengliu.paintwar.paintwar.entity.ModEntitys;
 import fengliu.paintwar.paintwar.item.ModItems;
+import fengliu.paintwar.paintwar.sound.ModSoundEvents;
 import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.entity.ColorItemPersistentThrownEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.particle.DustParticleEffect;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -36,7 +38,7 @@ public class SignalShellEntity extends ColorItemPersistentThrownEntity {
 
     @Override
     public List<? extends IColor> getColorItems() {
-        return ModItems.SIGNAL_SHELLS;
+        return ModItems.FLARE_SHELLS;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class SignalShellEntity extends ColorItemPersistentThrownEntity {
 
         BlockPos fallPos = this.getBlockPos().up();
         Vector3f color = Vec3d.unpackRgb(this.getColor().getFireworkColor()).toVector3f();
-
+        this.world.playSound(null, this.getBlockPos(), ModSoundEvents.ENTITY_FLARE_SHELL_HISS, SoundCategory.BLOCKS, 0.5F, 1.0F);
         int durationTick = this.getDurationTick();
         for (int index = 0; index < SIGNAL_HEIGHT; index ++){
             if (index * CHANGE_TICK < durationTick && durationTick > MAX_DURATION - index * CHANGE_TICK){
@@ -72,5 +74,6 @@ public class SignalShellEntity extends ColorItemPersistentThrownEntity {
     @Override
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
+        this.world.playSound(null, this.getBlockPos(), ModSoundEvents.ENTITY_LAND_FLARE_SHELL, SoundCategory.BLOCKS, 0.5F, 1.0F);
     }
 }

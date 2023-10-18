@@ -5,6 +5,7 @@ import fengliu.paintwar.paintwar.util.block.BaseBlock;
 import fengliu.paintwar.paintwar.util.block.IModBlock;
 import fengliu.paintwar.paintwar.util.item.BaseBlockItem;
 import fengliu.paintwar.paintwar.util.item.BaseItem;
+import fengliu.paintwar.paintwar.util.item.IModItem;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
@@ -41,7 +42,7 @@ public class ModelsDataGeneration extends FabricModelProvider {
     /**
      * 生成物品模型
      * <p>
-     * {@link BaseItem} 通过调用 {@link BaseItem#generateModel(ItemModelGenerator) generateModel} 生成 自定义/默认 generated 模型
+     * {@link IModItem} 通过调用 {@link IModItem#generateModel(ItemModelGenerator) generateModel} 生成 自定义/默认 generated 模型
      * <p>
      * 块物品模型在 {@link RegisterUtil#registerBlockItem(BlockItem, ItemGroup)}  registerBlockItem} 注册后, 生成默认 parent 模型指向块模型
      */

@@ -1,4 +1,22 @@
 {
+    "sound.subtitle.paintwar.item.use.block_paint_fire_generator": "方块颜料火焰发生器: 点火",
+    "sound.subtitle.paintwar.item.use.spray_gun": "喷枪: 喷镀",
+    "sound.subtitle.paintwar.item.use.brush": "画笔: 刷",
+    "sound.subtitle.paintwar.item.use.color_picker": "取色器: 吸取颜色",
+    "sound.subtitle.paintwar.item.use.flare_gun": "信号枪: 射击",
+
+    "sound.subtitle.paintwar.entity.throw.balloon": "水气球: 扔出",
+    "sound.subtitle.paintwar.entity.throw.land.balloon": "水气球: 爆裂",
+
+    "sound.subtitle.paintwar.entity.throw.bomb": "手雷: 扔出",
+    "sound.subtitle.paintwar.entity.land.smoke_bomb": "烟雾弹: 爆炸",
+    "sound.subtitle.paintwar.entity.smoke_bomb_hiss": "烟雾弹: 释放烟雾",
+
+    "sound.subtitle.paintwar.entity.land.flare_shell": "信号弹: 点燃",
+    "sound.subtitle.paintwar.entity.flare_shell_hiss": "信号弹: 释放烟雾",
+
+    "sound.subtitle.paintwar.entity.land.wall_shell": "墙体弹: 落地",
+
     "itemGroup.paintwar.tool_group": "颜料工具",
     "itemGroup.paintwar.block_group": "颜料方块",
 
@@ -40,11 +58,11 @@
     "item.paintwar.paint_smoke_bomb": "颜料烟雾弹",
     "item.paintwar.paint_smoke_bomb.tooltip": "就是带颜色的烟雾弹, 落地后会产生烟雾让人看不清, 烟雾持续 18 秒",
 
-    "item.paintwar.signal_gun": "信号枪",
-    "item.paintwar.signal_gun.tooltip": "信号枪, 发射信号弹, 信号弹落地后会产生 8 格高烟雾以标记位置, 烟雾持续 30 秒",
+    "item.paintwar.flare_gun": "信号枪",
+    "item.paintwar.flare_gun.tooltip": "信号枪, 发射信号弹, 信号弹落地后会产生 8 格高烟雾以标记位置, 烟雾持续 30 秒",
 
-    "item.paintwar.signal_shell": "信号弹",
-    "item.paintwar.signal_shell.tooltip": "就是带颜色的信号弹, 会产生 8 格高烟雾以标记位置, 烟雾持续 30 秒",
+    "item.paintwar.flare_shell": "信号弹",
+    "item.paintwar.flare_shell.tooltip": "就是带颜色的信号弹, 会产生 8 格高烟雾以标记位置, 烟雾持续 30 秒",
 
     "item.paintwar.scatter_color_gun": "散射颜料枪",
     "item.paintwar.scatter_color_gun.tooltip": "一次发射三个颜料气球, 蹲下时发射墙体, 好像可以附魔多重射击?",
@@ -68,5 +86,10 @@
     "block.item.paintwar.no_color_door.tooltip":"颜料染色的门, 使用对应颜色的钥匙才能打开, 好像可以设置颜色?",
 
     "block.paintwar.color_door": "颜料门",
-    "block.item.paintwar.color_door.tooltip":"颜料染色的门, 使用对应颜色的钥匙才能打开"
+    "block.item.paintwar.color_door.tooltip":"颜料染色的门, 使用对应颜色的钥匙才能打开",
+
+    "block.paintwar.color_trapdoor": "颜料活板门",
+
+    "item.paintwar.block_paint_fire_generator": "方块颜料火焰发生器",
+    "item.paintwar.block_paint_fire_generator.tooltip": "可以在带颜色名字的方块上生成对应颜料火焰, 玩家着颜料火焰时会对脚下带颜色名字的方块进行改色"
 }

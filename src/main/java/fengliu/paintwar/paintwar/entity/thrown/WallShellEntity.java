@@ -2,6 +2,7 @@ package fengliu.paintwar.paintwar.entity.thrown;
 
 import fengliu.paintwar.paintwar.entity.ModEntitys;
 import fengliu.paintwar.paintwar.item.ModItems;
+import fengliu.paintwar.paintwar.sound.ModSoundEvents;
 import fengliu.paintwar.paintwar.util.ShapeUtil;
 import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.entity.ColorItemThrownEntity;
@@ -17,6 +18,9 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.registry.Registries;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -81,6 +85,7 @@ public class WallShellEntity extends ColorItemThrownEntity {
     @Override
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
+        this.world.playSound(null, hitResult.getPos().getX(), hitResult.getPos().getY(), hitResult.getPos().getZ(), ModSoundEvents.ENTITY_LAND_WALL_SHELL, SoundCategory.PLAYERS, 0.5F, 1.0F);
         if (this.world.isClient || hitResult.getType() == BlockHitResult.Type.ENTITY){
             return;
         }
@@ -91,17 +96,13 @@ public class WallShellEntity extends ColorItemThrownEntity {
                 pos -> {
                     try {
                         this.getWorld().setBlockState(pos, blocks.get(index[0]).getDefaultState());
+                        this.world.playSound(null, pos, SoundEvents.BLOCK_STONE_PLACE, SoundCategory.BLOCKS, 0.5F, 1.0F);
                     } catch (ArrayIndexOutOfBoundsException err){
                         return;
                     }
                     index[0]++;
                 });
         this.kill();
-    }
-
-    @Override
-    protected void onEntityHit(EntityHitResult entityHitResult) {
-        super.onEntityHit(entityHitResult);
     }
 
     @Override

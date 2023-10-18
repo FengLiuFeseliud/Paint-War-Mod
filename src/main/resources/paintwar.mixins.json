@@ -4,8 +4,13 @@
   "package": "fengliu.paintwar.paintwar.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "EntityMixin",
+    "FireBlockMixin",
+    "LivingEntityMixin",
   ],
   "client": [
+    "EntityRenderDispatcherMixin",
+    "InGameOverlayRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

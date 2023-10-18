@@ -12,10 +12,10 @@ import net.minecraft.util.DyeColor;
 
 import java.util.function.Consumer;
 
-public class SignalShell extends BaseItem implements IColor {
+public class FlareShell extends BaseItem implements IColor {
     private final DyeColor color;
 
-    public SignalShell(Settings settings, DyeColor dyeColor, String textureName) {
+    public FlareShell(Settings settings, DyeColor dyeColor, String textureName) {
         super(settings, dyeColor, textureName);
         this.color = dyeColor;
     }

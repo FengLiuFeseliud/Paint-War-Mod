@@ -18,26 +18,13 @@ import net.minecraft.world.World;
 import java.util.Optional;
 
 public class NoColorDoorBlock extends DoorBlock implements IModBlock {
-    private final DyeColor color;
     private final String blockName;
     private final String textureName;
 
     public NoColorDoorBlock(Settings settings, BlockSetType blockSetType, String name) {
         super(settings, blockSetType);
-        this.color = null;
         this.blockName = name;
         this.textureName = name;
-    }
-
-    public NoColorDoorBlock(Settings settings, BlockSetType blockSetType, DyeColor color, String name) {
-        super(settings, blockSetType);
-        this.color = color;
-        this.blockName = color.getName() + "_" + name;
-        this.textureName = name;
-    }
-
-    public DyeColor getColor() {
-        return this.color;
     }
 
     @Override

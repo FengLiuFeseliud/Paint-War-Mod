@@ -27,8 +27,9 @@ public class ModItems {
     public static final ScatterColorGun SCATTER_COLOR_GUN = register(new ScatterColorGun(new FabricItemSettings().maxCount(1), "scatter_color_gun"), TOOL_GROUP);
     public static final List<ColorScatterColorGun> COLOR_SCATTER_COLOR_GUNS = RegisterUtil.registerColorItems(dyeColor -> new ColorScatterColorGun(new FabricItemSettings().maxCount(1), dyeColor,"color_scatter_color_gun"), TOOL_GROUP);
     public static final List<PaintSmokeBomb> PAINT_SMOKE_BOMBS = RegisterUtil.registerColorItems(dyeColor -> new PaintSmokeBomb(new FabricItemSettings().maxCount(8), dyeColor,"paint_smoke_bomb"), TOOL_GROUP);
-    public static final SignalGun SIGNAL_GUN = register(new SignalGun(new FabricItemSettings().maxCount(1), "signal_gun"), TOOL_GROUP);
-    public static final List<SignalShell> SIGNAL_SHELLS = RegisterUtil.registerColorItems(dyeColor -> new SignalShell(new FabricItemSettings().maxCount(16), dyeColor,"signal_shell"), TOOL_GROUP);
+    public static final FlareGun FLARE_GUN = register(new FlareGun(new FabricItemSettings().maxCount(1), "flare_gun"), TOOL_GROUP);
+    public static final List<FlareShell> FLARE_SHELLS = RegisterUtil.registerColorItems(dyeColor -> new FlareShell(new FabricItemSettings().maxCount(16), dyeColor,"flare_shell"), TOOL_GROUP);
+    public static final BlockPaintFireGenerator BLOCK_PAINT_FIRE_GENERATOR = register(new BlockPaintFireGenerator(new FabricItemSettings().maxCount(1).maxDamage(64), "block_paint_fire_generator"), TOOL_GROUP);
 
     public static <BI extends BaseItem> BI register(BI item, ItemGroup group){
         return RegisterUtil.registerItem(item.name, item, group);

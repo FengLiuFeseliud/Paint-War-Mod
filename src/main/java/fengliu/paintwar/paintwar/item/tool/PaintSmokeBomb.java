@@ -2,6 +2,7 @@ package fengliu.paintwar.paintwar.item.tool;
 
 import fengliu.paintwar.paintwar.entity.thrown.PaintSmokeBombEntity;
 import fengliu.paintwar.paintwar.item.ModItems;
+import fengliu.paintwar.paintwar.sound.ModSoundEvents;
 import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -15,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Hand;
@@ -55,6 +57,7 @@ public class PaintSmokeBomb extends BaseItem implements IColor {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
+        world.playSound(user, user.getBlockPos(), ModSoundEvents.ENTITY_THROW_BOMB, SoundCategory.PLAYERS, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!world.isClient) {
             ThrownItemEntity paintSmokeBombEntity = new PaintSmokeBombEntity(user, world);
             paintSmokeBombEntity.setItem(itemStack);

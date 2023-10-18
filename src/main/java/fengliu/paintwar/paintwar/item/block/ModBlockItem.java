@@ -22,6 +22,8 @@ public class ModBlockItem {
     public static final List<ColorPaintDetector> COLOR_PAINT_DETECTORS = RegisterUtil.registerBlockItems(ModBlocks.COLOR_PAINT_DETECTOR_BLOCKS, ColorPaintDetector::new, BLOCK_GROUP);
     public static final NoColorDoor NO_COLOR_DOOR = register(new NoColorDoor(ModBlocks.NO_COLOR_DOOR_BLOCK), BLOCK_GROUP);
     public static final List<ColorDoor> COLOR_DOORS = RegisterUtil.registerBlockItems(ModBlocks.COLOR_DOOR_BLOCKS, ColorDoor::new, BLOCK_GROUP);
+    public static final NoColorTrapdoor NO_COLOR_TRAPDOOR = register(new NoColorTrapdoor(ModBlocks.NO_COLOR_TRAPDOOR_BLOCK), BLOCK_GROUP);
+    public static final List<ColorTrapdoor> COLOR_TRAPDOORS = RegisterUtil.registerBlockItems(ModBlocks.COLOR_TRAPDOOR_BLOCKS, ColorTrapdoor::new, BLOCK_GROUP);
 
     public static <BI extends BlockItem & IModItem> BI register(BI blockItem, ItemGroup group){
         return RegisterUtil.registerBlockItem(blockItem, group);

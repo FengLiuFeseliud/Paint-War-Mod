@@ -1,10 +1,13 @@
 package fengliu.paintwar.paintwar.item.tool;
 
 import fengliu.paintwar.paintwar.entity.thrown.WaterBalloonEntity;
+import fengliu.paintwar.paintwar.sound.ModSoundEvents;
 import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Hand;
@@ -28,6 +31,8 @@ public class WaterBalloon extends BaseItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
+
+        world.playSound(user, user.getBlockPos(), ModSoundEvents.ENTITY_THROW_BALLOON, SoundCategory.PLAYERS, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!world.isClient) {
             ThrownItemEntity waterBalloon = this.getEntity(world, user);
             waterBalloon.setItem(itemStack);

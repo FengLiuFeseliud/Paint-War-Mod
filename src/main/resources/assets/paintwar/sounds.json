@@ -1,0 +1,80 @@
+{
+  "item.use.block_paint_fire_generator": {
+    "subtitle": "sound.subtitle.paintwar.item.use.block_paint_fire_generator",
+    "sounds": [
+      "paintwar:item/use/block_paint_fire_generator"
+    ]
+  },
+  "item.use.spray_gun": {
+    "subtitle": "sound.subtitle.paintwar.item.use.spray_gun",
+    "sounds": [
+      "paintwar:item/use/spray_gun"
+    ]
+  },
+  "item.use.brush": {
+    "subtitle": "sound.subtitle.paintwar.item.use.brush",
+    "sounds": [
+      "paintwar:item/use/brush"
+    ]
+  },
+  "item.use.color_picker": {
+    "subtitle": "sound.subtitle.paintwar.item.use.color_picker",
+    "sounds": [
+      "paintwar:item/use/color_picker"
+    ]
+  },
+  "item.use.flare_gun": {
+    "subtitle": "sound.subtitle.paintwar.item.use.flare_gun",
+    "sounds": [
+      "paintwar:item/use/flare_gun"
+    ]
+  },
+  "entity.throw.balloon": {
+    "subtitle": "sound.subtitle.paintwar.entity.throw.balloon",
+    "sounds": [
+      "paintwar:entity/throw/balloon"
+    ]
+  },
+  "entity.throw.land.balloon": {
+    "subtitle": "sound.subtitle.paintwar.entity.throw.land.balloon",
+    "sounds": [
+      "paintwar:entity/throw/land/balloon"
+    ]
+  },
+  "entity.throw.bomb": {
+    "subtitle": "sound.subtitle.paintwar.entity.throw.bomb",
+    "sounds": [
+      "paintwar:entity/throw/bomb"
+    ]
+  },
+  "entity.land.smoke_bomb": {
+    "subtitle": "sound.subtitle.paintwar.entity.land.smoke_bomb",
+    "sounds": [
+      "paintwar:entity/land/smoke_bomb"
+    ]
+  },
+  "entity.smoke_bomb_hiss": {
+    "subtitle": "sound.subtitle.paintwar.entity.smoke_bomb_hiss",
+    "sounds": [
+      "paintwar:entity/smoke_bomb_hiss"
+    ]
+  },
+  "entity.land.flare_shell": {
+    "subtitle": "sound.subtitle.paintwar.entity.land.flare_shell",
+    "sounds": [
+      "paintwar:entity/land/flare_shell"
+    ]
+  },
+  "entity.flare_shell_hiss": {
+    "subtitle": "sound.subtitle.paintwar.entity.flare_shell_hiss",
+    "sounds": [
+      "paintwar:entity/flare_shell_hiss"
+    ]
+  },
+  "entity.land.wall_shell": {
+    "subtitle": "sound.subtitle.paintwar.entity.land.wall_shell",
+    "sounds": [
+      "paintwar:entity/land/wall_shell"
+    ]
+  }
+}

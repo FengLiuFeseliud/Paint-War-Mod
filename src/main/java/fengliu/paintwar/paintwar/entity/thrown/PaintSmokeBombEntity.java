@@ -2,6 +2,7 @@ package fengliu.paintwar.paintwar.entity.thrown;
 
 import fengliu.paintwar.paintwar.entity.ModEntitys;
 import fengliu.paintwar.paintwar.item.ModItems;
+import fengliu.paintwar.paintwar.sound.ModSoundEvents;
 import fengliu.paintwar.paintwar.util.ShapeUtil;
 import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.entity.ColorItemPersistentThrownEntity;
@@ -9,6 +10,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.particle.DustParticleEffect;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -53,6 +56,7 @@ public class PaintSmokeBombEntity extends ColorItemPersistentThrownEntity {
             return;
         }
 
+        this.world.playSound(null, this.getBlockPos(), ModSoundEvents.ENTITY_SMOKE_BOMB_HISS, SoundCategory.PLAYERS, 0.5F, 1.0F);
         BlockPos fallPos = this.getBlockPos().up();
         Vector3f color = Vec3d.unpackRgb(this.getColor().getFireworkColor()).toVector3f();
         this.addParticle(7, fallPos, color);
@@ -76,5 +80,11 @@ public class PaintSmokeBombEntity extends ColorItemPersistentThrownEntity {
             fallPos = fallPos.up();
             this.addParticle(3, fallPos, color);
         }
+    }
+
+    @Override
+    protected void onCollision(HitResult hitResult) {
+        super.onCollision(hitResult);
+        this.world.playSound(null, this.getBlockPos(), ModSoundEvents.ENTITY_LAND_SMOKE_BOMB, SoundCategory.PLAYERS, 0.5F, 1.0F);
     }
 }

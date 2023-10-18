@@ -14,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
@@ -141,4 +142,11 @@ public class RegisterUtil {
         return blocks;
     }
 
+    public interface createSoundEvent{
+        SoundEvent get(Identifier soundId);
+    }
+
+    public static SoundEvent registerSoundEvent(Identifier soundId, createSoundEvent soundEvent){
+        return Registry.register(Registries.SOUND_EVENT, soundId, soundEvent.get(soundId));
+    }
 }
