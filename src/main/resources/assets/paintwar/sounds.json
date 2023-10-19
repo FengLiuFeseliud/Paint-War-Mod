@@ -29,6 +29,12 @@
       "paintwar:item/use/flare_gun"
     ]
   },
+  "item.cooldown.flare_gun": {
+    "subtitle": "sound.subtitle.paintwar.item.cooldown.flare_gun",
+    "sounds": [
+      "paintwar:item/cooldown/flare_gun"
+    ]
+  },
   "entity.throw.balloon": {
     "subtitle": "sound.subtitle.paintwar.entity.throw.balloon",
     "sounds": [
@@ -75,6 +81,24 @@
     "subtitle": "sound.subtitle.paintwar.entity.land.wall_shell",
     "sounds": [
       "paintwar:entity/land/wall_shell"
+    ]
+  },
+  "item.use.wall_gun": {
+    "subtitle": "sound.subtitle.paintwar.item.use.wall_gun",
+    "sounds": [
+      "paintwar:item/use/wall_gun"
+    ]
+  },
+  "item.cooldown.wall_gun": {
+    "subtitle": "sound.subtitle.paintwar.item.cooldown.wall_gun",
+    "sounds": [
+      "paintwar:item/cooldown/wall_gun"
+    ]
+  },
+  "item.use.scatter_color_gun": {
+    "subtitle": "sound.subtitle.paintwar.item.use.scatter_color_gun",
+    "sounds": [
+      "paintwar:item/use/scatter_color_gun"
     ]
   }
 }

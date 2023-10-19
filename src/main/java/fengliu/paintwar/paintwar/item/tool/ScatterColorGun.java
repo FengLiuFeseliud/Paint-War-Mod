@@ -1,6 +1,9 @@
 package fengliu.paintwar.paintwar.item.tool;
 
+import fengliu.paintwar.paintwar.entity.thrown.ColorWaterBalloonEntity;
+import fengliu.paintwar.paintwar.entity.thrown.WallShellEntity;
 import fengliu.paintwar.paintwar.item.ModItems;
+import fengliu.paintwar.paintwar.sound.ModSoundEvents;
 import fengliu.paintwar.paintwar.util.color.IColor;
 import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.minecraft.block.Block;
@@ -14,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -72,9 +76,10 @@ public class ScatterColorGun extends BaseItem {
                 break;
             }
 
-            if (stack.getItem() instanceof WaterBalloon waterBalloon){
+            if (stack.getItem() instanceof WaterBalloon waterBalloon && !player.isSneaking()){
                 shell = this.getWaterBalloonShell(waterBalloon, world, player);
                 stack.decrement(1);
+                this.sendWallShell = false;
             } else {
                 if (!player.isSneaking()){
                     break;
@@ -95,7 +100,6 @@ public class ScatterColorGun extends BaseItem {
 
     public boolean spawnShells(World world, PlayerEntity player, ItemStack handStack, ShellEntitySpawn spawn){
         this.spawnCount = 0;
-        this.sendWallShell = false;
         int scatterQuantity = ScatterColorGun.getScatterQuantity(handStack);
         for (int index = 0; index < PlayerInventory.MAIN_SIZE + 9; index++){
             ItemStack stack = player.getInventory().getStack(index);
@@ -108,7 +112,7 @@ public class ScatterColorGun extends BaseItem {
                 break;
             }
         }
-        return sendWallShell;
+        return this.sendWallShell;
     }
 
     public void gunNbtCool(PlayerEntity player, Hand hand){
@@ -131,18 +135,26 @@ public class ScatterColorGun extends BaseItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack stack = user.getStackInHand(hand);
+        float pitch = user.getPitch();
+        float[] yaw = new float[]{user.getYaw() - (float) (YAW_OFFSET * ScatterColorGun.getScatterQuantity(stack)) / 2};
+        this.spawnShells(world, user, stack, shell -> {
+            if (shell instanceof WallShellEntity){
+                world.playSound(user, user.getBlockPos(), ModSoundEvents.ITEM_USE_WALL_GUN, SoundCategory.PLAYERS, 0.5F, 1.0F);
+            } else {
+                world.playSound(user, user.getBlockPos(), ModSoundEvents.ITEM_USE_SCATTER_COLOR_GUN, SoundCategory.PLAYERS, 0.5F, 1.0F);
+            }
+            shell.setVelocity(user, pitch, yaw[0], 0.0F, 1.5F, 0F);
+            world.spawnEntity(shell);
+            yaw[0] = yaw[0] + YAW_OFFSET;
+        });
+
+        world.playSound(user, user.getBlockPos(), ModSoundEvents.ITEM_COOLDOWN_WALL_GUN, SoundCategory.PLAYERS, 1.0F, 1.0F);
         if (world.isClient){
             return super.use(world, user, hand);
         }
 
-        ItemStack stack = user.getStackInHand(hand);
-        float pitch = user.getPitch();
-        float[] yaw = new float[]{user.getYaw() - (float) (YAW_OFFSET * ScatterColorGun.getScatterQuantity(stack)) / 2};
-        if (this.spawnShells(world, user, stack, shell -> {
-            shell.setVelocity(user, pitch, yaw[0], 0.0F, 1.5F, 0F);
-            world.spawnEntity(shell);
-            yaw[0] = yaw[0] + YAW_OFFSET;
-        })){
+        if (this.sendWallShell){
             user.getItemCooldownManager().set(this, COOL_TIME);
             for (Item item: ModItems.COLOR_SCATTER_COLOR_GUNS){
                 user.getItemCooldownManager().set(item, COOL_TIME);

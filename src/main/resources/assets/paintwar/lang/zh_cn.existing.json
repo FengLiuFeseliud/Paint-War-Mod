@@ -3,7 +3,9 @@
     "sound.subtitle.paintwar.item.use.spray_gun": "喷枪: 喷镀",
     "sound.subtitle.paintwar.item.use.brush": "画笔: 刷",
     "sound.subtitle.paintwar.item.use.color_picker": "取色器: 吸取颜色",
+
     "sound.subtitle.paintwar.item.use.flare_gun": "信号枪: 射击",
+    "sound.subtitle.paintwar.item.cooldown.flare_gun": "信号枪: 装填",
 
     "sound.subtitle.paintwar.entity.throw.balloon": "水气球: 扔出",
     "sound.subtitle.paintwar.entity.throw.land.balloon": "水气球: 爆裂",
@@ -16,6 +18,11 @@
     "sound.subtitle.paintwar.entity.flare_shell_hiss": "信号弹: 释放烟雾",
 
     "sound.subtitle.paintwar.entity.land.wall_shell": "墙体弹: 落地",
+
+    "sound.subtitle.paintwar.item.use.wall_gun": "墙体枪: 射击",
+    "sound.subtitle.paintwar.item.cooldown.wall_gun": "墙体枪: 装填",
+
+    "sound.subtitle.paintwar.item.use.scatter_color_gun": "散射颜料枪: 射击",
 
     "itemGroup.paintwar.tool_group": "颜料工具",
     "itemGroup.paintwar.block_group": "颜料方块",

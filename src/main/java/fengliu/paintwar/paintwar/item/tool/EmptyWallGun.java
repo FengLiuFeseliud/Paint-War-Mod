@@ -2,6 +2,7 @@ package fengliu.paintwar.paintwar.item.tool;
 
 import fengliu.paintwar.paintwar.entity.thrown.WallShellEntity;
 import fengliu.paintwar.paintwar.item.ModItems;
+import fengliu.paintwar.paintwar.sound.ModSoundEvents;
 import fengliu.paintwar.paintwar.util.item.BaseItem;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,11 +11,15 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import net.minecraft.world.timer.Timer;
+import net.minecraft.world.timer.TimerCallback;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,14 +81,21 @@ public class EmptyWallGun extends BaseItem {
         return new WallShellEntity(player, world, wallBlocks);
     }
 
+    public static void timer(MinecraftServer server, String name, long tick, TimerCallback<MinecraftServer> callback){
+        Timer<MinecraftServer> stimer = server.getSaveProperties().getMainWorldProperties().getScheduledEvents();
+        stimer.setEvent(name + "_" + stimer.getEventNames().size(), server.getOverworld().getTime() + tick, callback);
+    }
+
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        if (world.isClient) {
+        List<Block> wallBlocks = EmptyWallGun.getWallBlocks(world, player, this.getColor());
+        if (wallBlocks.isEmpty()){
             return super.use(world, player, hand);
         }
 
-        List<Block> wallBlocks = EmptyWallGun.getWallBlocks(world, player, this.getColor());
-        if (wallBlocks.isEmpty()){
+        world.playSound(player, player.getBlockPos(), ModSoundEvents.ITEM_USE_WALL_GUN, SoundCategory.PLAYERS, 0.5F, 1.0F);
+        world.playSound(player, player.getBlockPos(), ModSoundEvents.ITEM_COOLDOWN_WALL_GUN, SoundCategory.PLAYERS, 1.0F, 1.0F);
+        if (world.isClient) {
             return super.use(world, player, hand);
         }
 

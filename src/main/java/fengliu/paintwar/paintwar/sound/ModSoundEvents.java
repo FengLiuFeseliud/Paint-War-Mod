@@ -9,7 +9,14 @@ public class ModSoundEvents {
     public static final SoundEvent ITEM_USE_SPRAY_GUN = RegisterUtil.registerSoundEvent(IdUtil.get("item.use.spray_gun"), SoundEvent::of);
     public static final SoundEvent ITEM_USE_BRUSH = RegisterUtil.registerSoundEvent(IdUtil.get("item.use.brush"), SoundEvent::of);
     public static final SoundEvent ITEM_USE_COLOR_PICKER = RegisterUtil.registerSoundEvent(IdUtil.get("item.use.color_picker"), SoundEvent::of);
+
     public static final SoundEvent ITEM_USE_FLARE_GUN = RegisterUtil.registerSoundEvent(IdUtil.get("item.use.flare_gun"), SoundEvent::of);
+    public static final SoundEvent ITEM_COOLDOWN_FLARE_GUN = RegisterUtil.registerSoundEvent(IdUtil.get("item.cooldown.flare_gun"), SoundEvent::of);
+
+    public static final SoundEvent ITEM_USE_WALL_GUN = RegisterUtil.registerSoundEvent(IdUtil.get("item.use.wall_gun"), SoundEvent::of);
+    public static final SoundEvent ITEM_COOLDOWN_WALL_GUN = RegisterUtil.registerSoundEvent(IdUtil.get("item.cooldown.wall_gun"), SoundEvent::of);
+
+    public static final SoundEvent ITEM_USE_SCATTER_COLOR_GUN = RegisterUtil.registerSoundEvent(IdUtil.get("item.use.scatter_color_gun"), SoundEvent::of);
 
     public static final SoundEvent ENTITY_THROW_BALLOON = RegisterUtil.registerSoundEvent(IdUtil.get("entity.throw.balloon"), SoundEvent::of);
     public static final SoundEvent ENTITY_THROW_LAND_BALLOON = RegisterUtil.registerSoundEvent(IdUtil.get("entity.throw.land.balloon"), SoundEvent::of);

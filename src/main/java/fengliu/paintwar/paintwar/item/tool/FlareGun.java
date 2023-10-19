@@ -30,7 +30,7 @@ public class FlareGun extends BaseItem {
                 continue;
             }
 
-            world.playSound(user, user.getBlockPos(), ModSoundEvents.ITEM_USE_FLARE_GUN, SoundCategory.PLAYERS, 0.5F, world.getRandom().nextFloat() * 0.4F + 0.8F);
+            world.playSound(user, user.getBlockPos(), ModSoundEvents.ITEM_USE_FLARE_GUN, SoundCategory.PLAYERS, 0.5F, 1.0F);
             ThrownItemEntity signalShellEntity = new SignalShellEntity(user, world);
             signalShellEntity.setItem(stack);
             signalShellEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 0F);
@@ -41,6 +41,7 @@ public class FlareGun extends BaseItem {
                 stack.decrement(1);
             }
 
+            world.playSound(user, user.getBlockPos(), ModSoundEvents.ITEM_COOLDOWN_FLARE_GUN, SoundCategory.PLAYERS, 0.5F, 1.0F);
             user.getItemCooldownManager().set(this, COOL_SIGNAL_GUN_TIME);
             break;
         }
